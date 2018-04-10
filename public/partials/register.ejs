@@ -1,0 +1,37 @@
+<div>
+    <form method="post" action="/register" class="XHRRegisterForm" >
+
+        <label for="email">Input Email: </label>
+        <input
+                minlength="10"
+                maxlength="40"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your E-mail"
+
+        ><br>
+        <label for="name">Input Password: </label>
+        <input
+                minlength="4"
+                maxlength="15"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Your Password:"
+                oninput="this.value = this.value.toUpperCase()"
+        ><br>
+        <label for="password">Confirm Password : </label>
+        <input
+                minlength="4"
+                maxlength="15"
+                type="password"
+                id="passwordC"
+                name="passwordC"
+                placeholder="Retry Your Password :"
+                oninput="this.value = this.value.toUpperCase()"
+        ><br>
+        <input type="submit" value="Submit">
+    </form>
+    <div class="resultAuth"></div>
+</div>
