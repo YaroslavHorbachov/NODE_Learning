@@ -1,30 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="766cf5a3-bd92-4125-a232-975c053bc8b7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/mdconfig/logger.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/nconf/nconf.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/winstonLogger/transport.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/.audit.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/2018-04-10-19-28.app.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/2018-04-10-19-29.app.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/2018-04-10-19.app.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/log/2018-04-10.app.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/404.ejs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/home.ejs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/grunge-leather-background-texture-hd.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/background.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/images.jpeg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.ejs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/register.ejs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/server.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/work.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/work.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.log" beforeDir="false" />
-    </list>
+    <list default="true" id="766cf5a3-bd92-4125-a232-975c053bc8b7" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -40,7 +17,7 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
+            <state relative-caret-position="1">
               <caret line="161" column="3" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
@@ -233,7 +210,7 @@
       <workItem from="1523005718521" duration="299000" />
       <workItem from="1523008115722" duration="22257000" />
       <workItem from="1523351389044" duration="28024000" />
-      <workItem from="1523437791846" duration="17696000" />
+      <workItem from="1523437791846" duration="17972000" />
     </task>
     <task id="LOCAL-00001" summary="Final">
       <created>1522947034019</created>
@@ -246,7 +223,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93369000" />
+    <option name="totallyTimeSpent" value="93645000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -259,7 +236,7 @@
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33156216" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.9851222" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -580,7 +557,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
+        <state relative-caret-position="1">
           <caret line="161" column="3" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
