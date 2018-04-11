@@ -1,0 +1,6 @@
+{
+  "PORT": 3020,
+  "DBNAME":"NODETEST",
+  "DBMODEL": "USERS"
+
+}

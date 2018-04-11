@@ -6,14 +6,14 @@ var path = require('path'),
     cookieParser = require('cookie-parser'),
     ejs = require('ejs'),
     winston = require('winston'),
-    transport = require('./config/winstonLogger/transport').transport,
+    transport = require('./core/config/winstonLogger/transport').transport,
     mongoose = require('mongoose'),
-    loggerMiddleware = require('./config/mdconfig/logger').middlewareLogger;
-global.nconf = require('./config/nconf/nconf');
-
+    loggerMiddleware = require('./core/config/mdconfig/logger').middlewareLogger;
+global.nconf = require('./core/config/nconf');
+global.app = express();
 
 /* CONFIG APP EXPRESS */
-var app = express();
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 
@@ -60,7 +60,12 @@ app.use(function (request, response, next) {
 });
 
 /* ROUTES */
-app.get('/', (req, res) => {
+const routes = require('./routes/index');
+console.log(routes)
+for (let route in routes){}
+
+
+/*app.get('/', (req, res) => {
     res.render('main', {
         route: 'index.ejs',
         title: 'Start Page',
@@ -69,9 +74,9 @@ app.get('/', (req, res) => {
         login: 'LOGIN',
         home: 'HOME'
     })
-});
+});*/
 
-app.route('/register')
+/*app.route('/register')
     .get((req, res) => {
         res.render('main', {
             route: 'register.ejs',
@@ -82,7 +87,7 @@ app.route('/register')
         function utilsDB(user) {
             var email = user.body.email,
                 password = user.body.password;
-            /*DB MONGO */
+            /!*DB MONGO *!/
             mongoose.connect('mongodb://localhost/' + userDB);
             var db = mongoose.connection;
             db.on('error', function () {
@@ -119,7 +124,7 @@ app.route('/register')
         }
 
         utilsDB(req)
-    });
+    });*/
 
 app.get('/log', (req, res) => {
     var resultPath = './log/result.log';
@@ -150,13 +155,14 @@ app.get('/log', (req, res) => {
 
     })
 });
-app.get('/home', (req, res) => {
+
+/*app.get('/home', (req, res) => {
     res.render('main', {
         route: 'home.ejs',
         title: 'Home'
     })
-});
-
+});*/
+/*
 app.get('/login', (req, res) => {
     res.redirect('/register')
 });
@@ -167,8 +173,8 @@ app.get('/404', (req, res) => {
         title: 'Home'
     })
 });
-app.get('/*', (req, res) => {
+app.get('/!*', (req, res) => {
     res.redirect('/404')
-});
-app.listen(nconf.get('PORT'));
-console.log(nconf.get('PORT'));
+});*/
+app.listen(3020);
+console.log('You',3020);
