@@ -4,7 +4,7 @@ html {
 }
 
 body {
-    background-image: url("/images/grunge-leather-background-texture-hd.jpg");
+    background-image: url("/images/background.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     /*height: 100%;*/
@@ -16,6 +16,14 @@ div.menu, div.button, form {
     margin-left: auto;
     color: black;
     font-size: xx-large;
+}
+div.preRoot>div{
+    margin: 20px;
+    position: absolute;
+    left: 10%;
+    width: 60%;
+    height: 30%;
+    overflow: scroll;
 }
 
 form input {

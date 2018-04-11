@@ -2,25 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="766cf5a3-bd92-4125-a232-975c053bc8b7" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/public/partials/home.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/partials/index.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/partials/register.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/mdconfig/logger.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/nconf/nconf.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/config/winstonLogger/transport.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/dev.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/dev.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/prod.json" beforeDir="false" afterPath="$PROJECT_DIR$/config/prod.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/mgoose.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db/schemas/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/partials/404.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/404.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/public/404.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/home.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/public/home.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/.audit.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/2018-04-10-19-28.app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/2018-04-10-19-29.app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/2018-04-10-19.app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log/2018-04-10.app.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/404.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/home.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/grunge-leather-background-texture-hd.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/public/images/background.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/images/images.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.ejs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/register.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/public/register.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/server.log" beforeDir="false" afterPath="$PROJECT_DIR$/public/server.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/register.ejs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/server.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/public/work.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/work.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.log" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -37,8 +40,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="265">
-              <caret line="190" column="27" lean-forward="true" selection-start-line="190" selection-start-column="27" selection-end-line="190" selection-end-column="27" />
+            <state relative-caret-position="289">
+              <caret line="161" column="3" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -46,31 +49,33 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="2018-04-10.app.log" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/log/2018-04-10.app.log">
+      <file leaf-file-name="result.log" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/log/result.log">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-158" />
+            <state relative-caret-position="408">
+              <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="work.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/work.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
+            <state relative-caret-position="306">
+              <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
-                <element signature="n#!!block;n#createCookie#0" />
-                <element signature="n#!!block;n#deleteCookie#0" />
-                <element signature="e#1077#2785#0" />
+                <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
-        </entry>
-      </file>
-      <file leaf-file-name=".audit.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/log/.audit.json">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -92,6 +97,10 @@
       <find>lis</find>
       <find>name</find>
       <find>info</find>
+      <find>date</find>
+      <find>logger.in</find>
+      <find>nconf</find>
+      <find>loggerMiddleware</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -111,7 +120,6 @@
         <option value="$PROJECT_DIR$/config/dev.json" />
         <option value="$PROJECT_DIR$/config/package.json" />
         <option value="$PROJECT_DIR$/config/prod.json" />
-        <option value="$PROJECT_DIR$/config/config.json" />
         <option value="$PROJECT_DIR$/db/schemas/schema.js" />
         <option value="$PROJECT_DIR$/db/mgoose.js" />
         <option value="$PROJECT_DIR$/ecosystem.config.js" />
@@ -126,10 +134,19 @@
         <option value="$PROJECT_DIR$/public/register.ejs" />
         <option value="$PROJECT_DIR$/public/partials/regirster.ejs" />
         <option value="$PROJECT_DIR$/public/partials/index.ejs" />
-        <option value="$PROJECT_DIR$/public/main.css" />
         <option value="$PROJECT_DIR$/public/partials/register.ejs" />
+        <option value="$PROJECT_DIR$/log/2018-04-09.app.log" />
+        <option value="$PROJECT_DIR$/public/main.css" />
+        <option value="$PROJECT_DIR$/config/config.json" />
         <option value="$PROJECT_DIR$/public/work.js" />
+        <option value="$PROJECT_DIR$/config/nconf/nconf.js" />
+        <option value="$PROJECT_DIR$/config/winstonLogger/transport.js" />
+        <option value="$PROJECT_DIR$/log/.audit.json" />
+        <option value="$PROJECT_DIR$/log/2018-04-11.app.log" />
+        <option value="$PROJECT_DIR$/log/result.log" />
         <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/config/mdconfig/logger.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -163,27 +180,6 @@
             <path>
               <item name="Node" type="b2602c69:ProjectViewProjectNode" />
               <item name="Node" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Node" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Node" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Node" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Node" type="462c0819:PsiDirectoryNode" />
-              <item name="log" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Node" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Node" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Node" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Node" type="462c0819:PsiDirectoryNode" />
-              <item name="public" type="462c0819:PsiDirectoryNode" />
-              <item name="partials" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -237,6 +233,7 @@
       <workItem from="1523005718521" duration="299000" />
       <workItem from="1523008115722" duration="22257000" />
       <workItem from="1523351389044" duration="28024000" />
+      <workItem from="1523437791846" duration="17696000" />
     </task>
     <task id="LOCAL-00001" summary="Final">
       <created>1522947034019</created>
@@ -249,7 +246,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75673000" />
+    <option name="totallyTimeSpent" value="93369000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -258,10 +255,11 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.36769393" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.33156216" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -270,7 +268,6 @@
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32943678" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,41 +286,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/db/mgoose.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/schemas/schema.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="2" selection-start-line="2" selection-start-column="2" selection-end-line="2" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1122">
-          <caret line="66" column="29" lean-forward="true" selection-start-line="66" selection-start-column="29" selection-end-line="66" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/home.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/work.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="27" column="28" selection-start-line="27" selection-start-column="28" selection-end-line="27" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
@@ -425,27 +387,8 @@
     <entry file="file://$PROJECT_DIR$/index.html" />
     <entry file="file://$PROJECT_DIR$/index.html" />
     <entry file="file://$PROJECT_DIR$/views/home.ejs" />
-    <entry file="file://$PROJECT_DIR$/config/config.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="19" selection-start-line="1" selection-start-column="19" selection-end-line="1" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/schemas/schema.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="32" lean-forward="true" selection-end-line="4" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/mgoose.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" selection-end-line="12" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/db/schemas/schema.js" />
+    <entry file="file://$PROJECT_DIR$/db/mgoose.js" />
     <entry file="file://$PROJECT_DIR$/config/dev.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -474,13 +417,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/register.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -492,27 +428,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="25" lean-forward="true" selection-start-line="18" selection-start-column="25" selection-end-line="18" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partials/index.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="43" selection-start-line="6" selection-start-column="28" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="12" selection-start-line="13" selection-start-column="12" selection-end-line="13" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/partials/home.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -528,31 +443,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/main.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/partials/404.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
           <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/error.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/combined.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/log/app.log.2018-04-10">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/log/application-2018-04-10-19.log">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/public/server.log">
       <provider selected="true" editor-type-id="text-editor">
@@ -561,12 +457,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log/2018-04-10-19-29.app.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/log/2018-04-10-19-28.app.log">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/partials/register.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -574,31 +464,124 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/log/.audit.json">
+    <entry file="file://$PROJECT_DIR$/log/2018-04-10-19-29.app.log">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/work.js">
+    <entry file="file://$PROJECT_DIR$/log/2018-04-09.app.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="31" column="28" selection-start-line="31" selection-start-column="28" selection-end-line="31" selection-end-column="28" />
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-            <element signature="n#!!block;n#createCookie#0" />
-            <element signature="n#!!block;n#deleteCookie#0" />
-            <element signature="e#1077#2785#0" />
-          </folding>
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/log/2018-04-10.app.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/2017-11-29.app.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/2019-10-23.app.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/index.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-158" />
+        <state relative-caret-position="119">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/main.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/images/background.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partials/home.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/partials/index.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="33" selection-start-line="13" selection-start-column="33" selection-end-line="13" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/work.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="24" selection-start-line="18" selection-start-column="24" selection-end-line="18" selection-end-column="24" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#h1#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/.audit.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="36" column="1" lean-forward="true" selection-start-line="36" selection-start-column="1" selection-end-line="36" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/2018-04-11.app.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/winstonLogger/transport.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="37" selection-start-line="14" selection-start-column="37" selection-end-line="14" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/nconf/nconf.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/log/result.log">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/mdconfig/logger.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="27" selection-start-line="2" selection-start-column="27" selection-end-line="2" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="265">
-          <caret line="190" column="27" lean-forward="true" selection-start-line="190" selection-start-column="27" selection-end-line="190" selection-end-column="27" />
+        <state relative-caret-position="289">
+          <caret line="161" column="3" selection-start-line="161" selection-start-column="3" selection-end-line="161" selection-end-column="3" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>

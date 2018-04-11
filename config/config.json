@@ -1,4 +1,7 @@
 {
   "name" :"Dmitro",
-  "surname" : "Putruhow"
+  "surname" : "Putruhow",
+  "DBNAME":"NODETEST",
+  "DBMODEL": "USERS"
+
 }

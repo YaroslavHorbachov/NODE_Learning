@@ -5,114 +5,61 @@ var path = require('path'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     ejs = require('ejs'),
-    nconf = require('nconf'),
     winston = require('winston'),
-    dailyRotate = require('winston-daily-rotate-file'),
-    mongoose = require('mongoose');
+    transport = require('./config/winstonLogger/transport').transport,
+    mongoose = require('mongoose'),
+    loggerMiddleware = require('./config/mdconfig/logger').middlewareLogger;
+global.nconf = require('./config/nconf/nconf');
 
 
 /* CONFIG APP EXPRESS */
 var app = express();
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+
+
 app.set('views', path.join(__dirname, 'public'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 
 
-/* EJS SYNTAX TREE */
-
-var objIndex = {
-    register: 'REGISTER',
-    login: 'LOGIN',
-    home: 'HOME'
-};
-var objHome = {
-    home: 'HOME'
-};
-
-
-
-// Create the log directory if it does not exist
-var env = nconf.get('NODE_ENV');
 var logDir = 'log';
 if (!fs.existsSync(logDir)) {
     fs.mkdirSync(logDir);
 }
-var transport = new dailyRotate({
-    filename: logDir + '/%DATE%.app.log',
-    datePattern: 'YYYY-MM-DD',
-    zippedArchive: true,
-    maxSize: '30m',
-    maxFiles: '30d' })
 
-transport.on('rotate', (oldF,newF)=>{
-    console.log(newF, newF)
-})
 
 const logger = new winston.createLogger({
-    transports: [ transport ]
+    transports: [transport]
 });
 
-nconf.argv().env().file('./config/config.json');
-
-nconf.get('NODE_ENV') == 'production' ? nconf.file('./config/prod.json') : nconf.file('./config/dev.json');
-logger.info(nconf.get('PORT'));
-
-var port = null;
-var data = null;
-
-/* FUNCTION WHO GET DATA FROM CONFIG */
-
-// console.log('Procees env ', process.env);
-
-function getConfigData(err, content) {
-    if (err) {
-        console.log(err);
-        return null;
-    } else {
-        data = JSON.parse(content);
-        if (data['PORT']) {
-            port = data['PORT']
-        } else {
-            throw new Error('Config file without PORT setting')
-        }
-    }
-}
 
 /* MONGO CONFIG */
 
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema(
-    {
-        email: String,
-        password: String
-    },
+    {email: String, password: String},
     {versionKey: false}
-)
+);
 
-var userDB = 'NODETEST';
-var userModel = 'USERS';
+var userDB = nconf.get('DBNAME');
+var userModel = nconf.get('DBMODEL');
+
+
+/* MIDDLEWARE */
+app.use(function (request, response, next) {
+    var data = loggerMiddleware(request, response)
+    if (data === 'false') {
+        next();
+    }
+    else {
+        logger.info(data + "\n");
+        next();
+    }
+});
 
 /* ROUTES */
-app.use(function (request, response, next) {
-    var now = new Date();
-    var hour = now.getHours();
-    var minutes = now.getMinutes();
-    var seconds = now.getSeconds();
-    var miliseconds = now.getMilliseconds();
-    var data =
-        'Time: ' + hour + ':' + minutes + ':' + seconds + ':' + miliseconds + '; '
-        + 'Method: ' + request.method + '; '
-        + 'URl: ' + request.url + '; '
-        + 'Cookies: keys: ' + Object.keys(request.cookies).join(' ') + ', values: ' + Object.values(request.cookies).join(' ') + ' ' + '; '
-        + 'Hostname: ' + request.hostname + '; '
-        + 'StatusCode: ' + response.statusCode + '; '
-        + 'User agent: ' + request.get('user-agent') + '; ';
-    logger.info( data + "\n");
-    next();
-});
 app.get('/', (req, res) => {
     res.render('main', {
         route: 'index.ejs',
@@ -121,7 +68,6 @@ app.get('/', (req, res) => {
         register: 'REGISTER',
         login: 'LOGIN',
         home: 'HOME'
-
     })
 });
 
@@ -136,14 +82,9 @@ app.route('/register')
         function utilsDB(user) {
             var email = user.body.email,
                 password = user.body.password;
-
-
             /*DB MONGO */
-
             mongoose.connect('mongodb://localhost/' + userDB);
-
             var db = mongoose.connection;
-
             db.on('error', function () {
                 console.error('Trouble error');
             })
@@ -154,7 +95,6 @@ app.route('/register')
                     email: email,
                     password: password
                 });
-
                 UserDoc.find({email: email}, function (err, doc) {
                     if (err) {
                         logger.error(err.errmsg)
@@ -182,25 +122,34 @@ app.route('/register')
     });
 
 app.get('/log', (req, res) => {
-    var date = new Date().toLocaleDateString().split('-').map(item => {
-        if(item < 10) {return '0'+item}
-        else {return item}
-    }).join('-');
-    fs.readdir('./log',(err, data) => {
-        var target = data.filter(data => data.split('.')[0] === date);
-        console.log(target)
-    } )
-    console.log(date);
-    fs.readFile('./public/server.log', (err, content) => {
+    var resultPath = './log/result.log';
+    fs.readdir('./log', (err, data) => {
         if (err) {
-            winston.error(err.errmsg)
-            res.end('Error');
-        } else {
-            res.end(content, 'utf8');
+            res.end(null, 'utf8')
         }
-    })
-})
+        var resultString = '';
+        var target = data.filter(data => data.split('.')[0].length === 10).slice(-3);
+        target.forEach(file => {
+            console.log('./log/' + file);
+            var files = fs.readFileSync('./log/' + file, 'utf8');
+            resultString += files;
+        })
+        fs.writeFile(resultPath, resultString, 'utf8', (err) => {
+            if (err) {
+                res.end(null, 'utf8')
+            }
+        });
+        fs.readFile(resultPath, (err, data) => {
+            if (err) {
+                logger.error(err.errmsg);
+                res.end(err, 'utf8');
+            }
+            res.end(data, 'utf8')
+        });
+        console.log('Ready for reading, all logs ion .log/result.log')
 
+    })
+});
 app.get('/home', (req, res) => {
     res.render('main', {
         route: 'home.ejs',
@@ -212,11 +161,14 @@ app.get('/login', (req, res) => {
     res.redirect('/register')
 });
 
-app.get('/*', (req, res) => {
+app.get('/404', (req, res) => {
     res.render('main', {
         route: '404.ejs',
         title: 'Home'
     })
 });
+app.get('/*', (req, res) => {
+    res.redirect('/404')
+});
 app.listen(nconf.get('PORT'));
-console.log(nconf.get('PORT'))
+console.log(nconf.get('PORT'));
