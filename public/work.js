@@ -10,10 +10,12 @@ function createCookie() {
     document.cookie = 'isAdmin=true';
     objSession.key = 'true'
 }
+
 function deleteCookie() {
     document.cookie = 'isAdmin' + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     objSession.key = '';
 }
+
 /* WORK WITH PAGE LOGGER */
 function getLog() {
     Root.innerHTML = '';

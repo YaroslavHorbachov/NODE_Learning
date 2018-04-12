@@ -1,5 +1,5 @@
 function root() {
-    return app.get('/', (req, res) => {
+    app.get('/', (req, res) => {
         res.render('main', {
             route: 'index.ejs',
             title: 'Start Page',
@@ -9,5 +9,7 @@ function root() {
             home: 'HOME'
         })
     });
+
 }
-module.exports.rootRoute = root();
+
+module.exports = root;
