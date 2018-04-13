@@ -1,0 +1,43 @@
+<div>
+    <form class="example-form">
+
+
+        <input
+                [(ngModel)]="email"
+                type="email"
+                id="email"
+                name="email"
+                placeholder="Your E-mail"
+
+        >
+
+        <br>
+
+
+        <input
+                [(ngModel)]="password"
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Your Password:"
+
+        >
+
+        <br>
+
+
+        <input
+                [(ngModel)]="passwordC"
+                type="password"
+                id="passwordC"
+                name="passwordC"
+                placeholder="Retry Your Password :">
+
+        <br>
+
+        <button (click)="compareForm($event)">Send</button>
+    </form>
+    <div class="resultAuth"></div>
+
+</div>
+
