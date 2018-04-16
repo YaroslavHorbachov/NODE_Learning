@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit{
         console.log(this.email,this.password, this.passwordC)
     }
     ngOnInit(): void {
-        this.heroForm = new FormGroup({
+       /* this.heroForm = new FormGroup({
             'name': new FormControl(this.hero.name, [
                 Validators.required,
                 Validators.minLength(4),
@@ -23,10 +23,10 @@ export class RegisterComponent implements OnInit{
             ]),
             'alterEgo': new FormControl(this.hero.alterEgo),
             'power': new FormControl(this.hero.power, Validators.required)
-        });
+        });*/
     }
 
-    get name() { return this.heroForm.get('name'); }
+   /* get name() { return this.heroForm.get('name'); }
 
-    get power() { return this.heroForm.get('power'); }
+    get power() { return this.heroForm.get('power'); }*/
 }
