@@ -2,14 +2,12 @@ const db = require('../core/db'),
     UserDoc = require('../models/user').UserDoc,
     bcrypt = require('bcryptjs');
 
-function mongoLogin(req, res) {
-    const body = req.body,
-        email = body.email,
-        password = body.password;
-
+function mongoLogin(email, password, done) {
 
     db().on('error', function () {
         console.error('Trouble error');
+        done(null, false)
+
     });
     db().once('open', function () {
         console.log('Open DB!');
@@ -18,18 +16,27 @@ function mongoLogin(req, res) {
         UserDoc.find({email: email}, (error, data) => {
             if (error) {
                 logger.error(error);
+                done(error)
             } else {
                 if (data.length > 0) {
-                    console.log('User find', data);
+                    // console.log('User find', data);
                     bcrypt.compare(password, data[0].password, (err, result) => {
                         if (err) {
-                            console.log('Some problem with decrypt ', err)
+                            console.log('Some problem with decrypt ', err);
+                            done(error)
                         } else {
                             if (result) {
                                 console.log('Result done', result);
-                                res.send(JSON.stringify({state: 'done'}))
+                                done(null, {
+                                    email: data[0].email,
+                                    password : data[0].password,
+                                    id: data[0]._id
+                                })
+                                // res.send(JSON.stringify({state: 'done'}))
                             } else {
-                                res.send(JSON.stringify({state: 'error'}))
+                                console.log('Error compare')
+                                done(error);
+                                // res.send(JSON.stringify({state: 'error'}))
                             }
                         }
                     })

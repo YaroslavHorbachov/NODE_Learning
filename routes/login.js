@@ -1,37 +1,28 @@
 const bodyParser = require('body-parser'),
     mongoLogin = require('../controllers/mongoLogin.controller'),
+
     passport = require('passport'),
+
     User = require('../models/user').UserDoc,
+
+
     LocalStrategy = require('passport-local').Strategy;
 
-passport.use(new LocalStrategy({
-        usernameFiled: 'email',
-        passwordFiled: 'password'
-    },
-    function (username, password, done) {
-        console.log(username, password);
-        done(null, false, {message: 'Fuck you'})
 
-    }
-));
-passport.serializeUser(function(user, done) {
-    done(null, user.id);
-});
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err,user){
-        err
-            ? done(err)
-            : done(null,user);
-    });
-});
+require('./../core/passport');
+
+
 function login() {
     app.post('/login',
-        passport.authenticate('local',
-            {
-                successRedirect: '/',
-                failureRedirect: '/login',
-            })
+        passport.authenticate('local'),
+        (req, res) => {
+            console.log('user request', req.user);
+            res.send(JSON.stringify(req.user))
+        }
     )
+    app.get('/login', (req, res) => {
+        console.log('Done Login', req.isAuthenticated());
+    })
 }
 
 
