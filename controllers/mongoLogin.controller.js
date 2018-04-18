@@ -29,19 +29,20 @@ function mongoLogin(email, password, done) {
                                 console.log('Result done', result);
                                 done(null, {
                                     email: data[0].email,
-                                    password : data[0].password,
+                                    password: data[0].password,
+                                    fname: data[0].fname,
                                     id: data[0]._id
                                 })
-                                // res.send(JSON.stringify({state: 'done'}))
                             } else {
-                                console.log('Error compare')
+                                console.log('Error compare');
                                 done(error);
-                                // res.send(JSON.stringify({state: 'error'}))
+
                             }
                         }
                     })
                 } else {
                     console.log('Not find this register user')
+                    done(null, false)
                 }
             }
         });
@@ -53,24 +54,3 @@ function mongoLogin(email, password, done) {
 }
 
 module.exports = mongoLogin;
-
-/*
-passport.use(new LocalStrategy(
-    function (username, password, done) {
-
-        UserDoc.find(username, function (err, user) {
-            if (err) throw err;
-            if (!user) {
-                return done(null, false, {message: 'Unknown User'});
-            }
-
-            User.comparePassword(password, user.password, function (err, isMatch) {
-                if (err) throw err;
-                if (isMatch) {
-                    return done(null, user);
-                } else {
-                    return done(null, false, {message: 'Invalid password'});
-                }
-            });
-        });
-    }));*/

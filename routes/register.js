@@ -13,7 +13,6 @@ function register() {
     });
     app.post('/register', bodyParser.json(), (req, res) => {
         console.log(req.body);
-
          controllerDB(req, res);
     });
 

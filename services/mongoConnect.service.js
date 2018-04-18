@@ -6,14 +6,14 @@ function mongoConnectService(res, model, user) {
         else {
             console.log('Data', doc);
             if (doc.length > 0) {
-                res.send(JSON.stringify({state:'error'}));
+                res.send(JSON.stringify({...user, state:'error'}));
             }
             else {
                 user.save((err) => {
                     if (err) {
                         logger.error(err.errmsg);
                     } else {
-                        res.send(JSON.stringify({state:'done'}))
+                        res.send(JSON.stringify({...user._doc, state:'done'}))
                     }
                 });
             }

@@ -13,7 +13,7 @@ passport.use(new LocalStrategy({
         mongoLogin(email,pass,done)
     },
     (req,res) =>{
-        console.log('This user', req.user)
+        console.log('This user', req.user);
         res.send(JSON.stringify(req.user));
     }
 ));

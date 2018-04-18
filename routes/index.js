@@ -3,6 +3,7 @@ let home = require('./home');
 let login = require('./login');
 let register = require('./register');
 let log = require('./api.log');
+let change = require('./api.change');
 let other = require('./404');
 module.exports = {
     log,
@@ -10,5 +11,6 @@ module.exports = {
     home,
     login,
     register,
+    change,
     other
 };

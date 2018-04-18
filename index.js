@@ -11,16 +11,18 @@ session = require('express-session');
 Object.assign(global, require('./core/globals'));
 
 /* CONFIG APP EXPRESS */
+app.set('view engine','ejs');
 app.use(express.static('public'));
 app.use(cookieParser());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit:'100mb'}));
+app.use(bodyParser.urlencoded({extend: false, limit:'100mb'}));
 app.use(session({ secret: 'keyboard cat' }));
 app.use(passport.initialize());
 app.use(passport.session());
 // app.use(app.router);
 require('./core/passport');
 app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     next();

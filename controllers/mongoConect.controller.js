@@ -20,7 +20,6 @@ function mongoConnect(req, res) {
             });
         });
     }
-
     const user = new UserDoc({
         fname: fname,
         lname: lname,
@@ -28,10 +27,7 @@ function mongoConnect(req, res) {
         password: password
     });
 
-    createUser(user, function (err, user) {
-        if (err) throw err;
-        console.log('User hash password was created ', user);
-    });
+    createUser(user);
 
 
     db().on('error', function () {

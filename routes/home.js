@@ -7,4 +7,4 @@ function home() {
     });
 }
 
-module.exports = home
+module.exports = home;
