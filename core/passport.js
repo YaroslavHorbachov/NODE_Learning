@@ -2,10 +2,10 @@ const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
     mongoLogin = require('./../controllers/mongoLogin.controller');
 
-console.log('this passopot')
+
 passport.use(new LocalStrategy({
     usernameField: 'email',
-    passwordField: 'password'
+    passwordField: 'password',
 },
     (username, password, done) => {
         const [email, pass] = [username,password];
@@ -24,7 +24,9 @@ passport.serializeUser(function(user, done) {
 
 passport.deserializeUser(function(id, done) {
     User.findById(id, function(err, user) {
-        done(err, user);
+        err
+            ? done(err)
+            : done(null,user);
     });
 });
 module.exports = passport;

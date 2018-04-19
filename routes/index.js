@@ -3,7 +3,8 @@ let home = require('./home');
 let login = require('./login');
 let register = require('./register');
 let log = require('./api.log');
-let change = require('./api.change');
+let change = require('./api.updateAvatar');
+let getUserList = require('./api.getUserList');
 let other = require('./404');
 module.exports = {
     log,
@@ -12,5 +13,6 @@ module.exports = {
     login,
     register,
     change,
+    getUserList,
     other
 };

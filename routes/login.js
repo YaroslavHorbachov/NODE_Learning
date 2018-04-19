@@ -1,14 +1,4 @@
-const bodyParser = require('body-parser'),
-    mongoLogin = require('../controllers/mongoLogin.controller'),
-
-    passport = require('passport'),
-
-    User = require('../models/user').UserDoc,
-
-
-    LocalStrategy = require('passport-local').Strategy;
-
-
+const passport = require('passport');
 require('./../core/passport');
 
 
@@ -20,22 +10,7 @@ function login() {
             res.send(JSON.stringify(req.user))
         }
     )
-    app.get('/login', (req, res) => {
-        console.log('Done Login', req.isAuthenticated());
-    })
 }
-
-
-/*
-app.post('/login', bodyParser.json(), (req, res) => {
-    console.log('Request on login', req.body);
-    const data = {state: 'Done'};
-    mongoLogin(req, res);
-    // res.send(JSON.stringify(data));
-});
-*/
-
-
 module.exports = login;
 
 
@@ -59,6 +34,4 @@ function login() {
 }
 
 module.exports = login;
-
-
 */
