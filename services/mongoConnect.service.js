@@ -6,7 +6,7 @@ function mongoConnectService(res, model, user) {
         else {
             console.log('Data', doc);
             if (doc.length > 0) {
-                res.send(JSON.stringify({...user, state:'error'}));
+                res.send(JSON.stringify({state:'error'}));
             }
             else {
                 user.save((err) => {

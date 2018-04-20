@@ -1,32 +1,28 @@
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    mongoLogin = require('./../controllers/mongoLogin.controller');
+    mongoLogin = require('./../controllers/mongoLogin.controller'),
+    User = require('./../models/user').UserDoc,
+    bcrypt = require('bcryptjs');
 
 
-passport.use(new LocalStrategy({
-    usernameField: 'email',
-    passwordField: 'password',
-},
-    (username, password, done) => {
-        const [email, pass] = [username,password];
-        console.log('This data : - ', email,  pass );
-        mongoLogin(email,pass,done)
-    },
-    (req,res) =>{
-        console.log('This user', req.user);
-        res.send(JSON.stringify(req.user));
+passport.use(new LocalStrategy(
+    function (user, pass, done) {
+        User.findOne({email: user}, (err, doc) => {
+            console.log('This doc', doc);
+
+        })
+        done(null, {user: 'Dmitrik'})
     }
 ));
-passport.serializeUser(function(user, done) {
-    console.log('This user', user);
-    done(null, user.id);
+
+passport.serializeUser(function (user, done) {
+    console.log('This Serialise user', user);
+    done(null, user.user);
 });
 
-passport.deserializeUser(function(id, done) {
-    User.findById(id, function(err, user) {
-        err
-            ? done(err)
-            : done(null,user);
-    });
+passport.deserializeUser(function (user, done) {
+    console.log('This DESerialise user');
+    done(null, user)
+
 });
 module.exports = passport;
