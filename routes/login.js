@@ -13,7 +13,7 @@ function login() {
         }
     )
 }
-
+/*
 passport.use(new LocalStrategy(
     {
         usernameField: "email",
@@ -45,12 +45,14 @@ passport.serializeUser(function (user, done) {
 
 
 passport.deserializeUser(function (id, done) {
-
-    User.findById(id, function (err, user) {
-        console.log(`This DeSerialise user ${user}`);
-        done(err, user)
+    console.log('ID', id)
+    User.findById(id, (err, doc) => {
+        if(err) { console.log('Error', err) ; done(null, false);}
+        console.log(doc);
+        console.log(`This DeSerialise user $`);
+        done(null, doc)
     });
-});
+});*/
 
 module.exports = login;
 

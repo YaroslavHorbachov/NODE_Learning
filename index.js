@@ -31,7 +31,7 @@ var passport = require("./core/passport");
 
 
 
-//app.use(cors());
+
 app.set('view engine','ejs')
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
@@ -57,6 +57,7 @@ app.use(function(request, response, next){
     next();
 });
 */
+
 app.use(function(request, response, next) {
     response.header("Access-Control-Allow-Origin", "http://localhost:4200");
     response.header("Access-Control-Allow-Credentials", true);

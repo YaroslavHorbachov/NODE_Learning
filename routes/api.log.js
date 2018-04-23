@@ -2,7 +2,7 @@ const fs = require('fs');
 
 function log() {
     app.get('/log', (req, res) => {
-        console.log(req.session)
+        console.log(req.session.passport)
         var resultPath = './log/result.log';
         new Promise((res,rej) =>{
             fs.readdir('./log',(err,data) =>{

@@ -1,28 +1,46 @@
 const passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy,
-    mongoLogin = require('./../controllers/mongoLogin.controller'),
-    User = require('./../models/user').UserDoc,
-    bcrypt = require('bcryptjs');
+    User = require('./../models/user').UserDoc;
+
 
 
 passport.use(new LocalStrategy(
-    function (user, pass, done) {
-        User.findOne({email: user}, (err, doc) => {
-            console.log('This doc', doc);
+    {
+        usernameField: "email",
+        passwordField: "password"
+    },
+    function (username, password, done) {
+        User.findOne({email: username}, (err, doc) => {
+            if (err) {
+                console.error('Critical Error with DB', err);
+                done(err);
+            }
+            else {
+                if (doc) {
+                    done(null, {fname: doc.fname, id: doc._id, status: 'done'})
+                } else {
+                    done(null, false)
+                }
+            }
 
         })
-        done(null, {user: 'Dmitrik'})
     }
 ));
 
+
 passport.serializeUser(function (user, done) {
-    console.log('This Serialise user', user);
-    done(null, user.user);
+    console.log('This Serialise user', user.id);
+    done(null, user.id);
 });
 
-passport.deserializeUser(function (user, done) {
-    console.log('This DESerialise user');
-    done(null, user)
 
+passport.deserializeUser(function (id, done) {
+
+    User.findById(id, (err, doc) => {
+        if(err) { console.log('Error', err) ; done(null, false);}
+        console.log(`Deserialize user ...`);
+        done(null, doc)
+    });
 });
+
 module.exports = passport;

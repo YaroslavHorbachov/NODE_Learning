@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 
 
 function register() {
-    // app.use('/register', bodyParser.json());
-
     app.get('/register', (req, res) => {
         res.render('main', {
             route: 'register.ejs',
