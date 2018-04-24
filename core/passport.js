@@ -3,7 +3,6 @@ const passport = require('passport'),
     User = require('./../models/user').UserDoc;
 
 
-
 passport.use(new LocalStrategy(
     {
         usernameField: "email",
@@ -30,16 +29,19 @@ passport.use(new LocalStrategy(
 
 passport.serializeUser(function (user, done) {
     console.log('This Serialise user', user.id);
-    done(null, user.id);
+    done(null, user.id)
 });
 
 
 passport.deserializeUser(function (id, done) {
-
     User.findById(id, (err, doc) => {
-        if(err) { console.log('Error', err) ; done(null, false);}
-        console.log(`Deserialize user ...`);
-        done(null, doc)
+        if (err) {
+            done(err, false)
+        } else {
+            console.log(`Deserialize user ...`);
+            return done(null, doc)
+        }
+
     });
 });
 

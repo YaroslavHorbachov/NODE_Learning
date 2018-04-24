@@ -6,11 +6,19 @@ let log = require('./api.log');
 let change = require('./api.updateAvatar');
 let getUserList = require('./api.getUserList');
 let logout = require('./logout');
+let loginGoogle = require('./loginGoogle');
 let getUser = require('./api.user');
 let deleteUser = require('./api.deleteUser');
 let other = require('./404');
+let loginFacebook = require('./loginFacebook');
+let loginAuthFacebook = require('./loginAuthFacebook')
+let authGoogleRedirect = require('./loginAuthGoogle');
 module.exports = {
     log,
+    loginAuthFacebook,
+    loginFacebook,
+    authGoogleRedirect,
+    loginGoogle,
     deleteUser,
     change,
     root,

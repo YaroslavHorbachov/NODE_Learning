@@ -13,7 +13,8 @@ function mongoConnectService(res, model, user) {
                     if (err) {
                         logger.error(err.errmsg);
                     } else {
-                        res.send(JSON.stringify({...user._doc, state:'done'}))
+                        console.log('Success')
+                        res.send(JSON.stringify({state:'done'}))
                     }
                 });
             }

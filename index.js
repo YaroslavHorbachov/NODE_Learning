@@ -17,7 +17,7 @@ var path = require('path'),
 Object.assign(global, require('./core/globals'));
 
 var express = require("express");
-
+var cors = require("cors")
 var ejs = require("ejs")
 var path = require("path");
 var cookieParser = require("cookie-parser");
@@ -31,7 +31,7 @@ var passport = require("./core/passport");
 
 
 
-
+app.use(cors());
 app.set('view engine','ejs')
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
@@ -58,6 +58,7 @@ app.use(function(request, response, next){
 });
 */
 
+
 app.use(function(request, response, next) {
     response.header("Access-Control-Allow-Origin", "http://localhost:4200");
     response.header("Access-Control-Allow-Credentials", true);
@@ -68,7 +69,6 @@ app.use(function(request, response, next) {
     );
     next();
 });
-
 
 /*
 

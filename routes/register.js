@@ -1,7 +1,4 @@
-const controllerDB = require('../controllers/mongoConect.controller')
-const bodyParser = require('body-parser');
-
-
+const controllerDB = require('../controllers/mongoConect.controller');
 function register() {
     app.get('/register', (req, res) => {
         res.render('main', {
@@ -9,12 +6,11 @@ function register() {
             title: 'Register'
         })
     });
-    app.post('/register', bodyParser.json(), (req, res) => {
-        console.log(req.body);
-         controllerDB(req, res);
+    app.post('/register', (req, res) => {
+        controllerDB(req, res);
     });
-
-
 }
+
+
 
 module.exports = register;
