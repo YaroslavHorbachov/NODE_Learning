@@ -1,11 +1,11 @@
 const passport = require('passport')
+
 function loginAuthFacebook() {
     app.get('/login/auth/facebook',
-        passport.authenticate('facebook'),
+        passport.authenticate('facebook', {scope: ['email', 'public_profile']}),
         (req, res) => {
-        // console.log('Callback ', req.user)
-        res.redirect('http://localhost:4200/login')
-    })
+            res.redirect('http://localhost:4200/login')
+        })
 }
 
 module.exports = loginAuthFacebook

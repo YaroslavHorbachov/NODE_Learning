@@ -1,5 +1,5 @@
-const loggerMiddleware = require('../core/config/utils/logger'),
-    logger = require('./../core/logger');
+const loggerMiddleware = require('../../core/config/utils/logger'),
+    logger = require('../../core/logger');
 
 function other() {
     app.get('/*', (req, res) => {

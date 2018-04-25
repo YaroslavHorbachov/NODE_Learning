@@ -17,21 +17,19 @@ var path = require('path'),
 Object.assign(global, require('./core/globals'));
 
 var express = require("express");
-var cors = require("cors")
 var ejs = require("ejs")
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-
+const CommentUser = require('./models/user').CommentDoc;
 require("./core/globals");
 var db = require("./core/db");
 var passport = require("./core/passport");
 
 
 
-app.use(cors());
 app.set('view engine','ejs')
 app.use(express.static(path.join(__dirname, "public")));
 app.use(cookieParser());
@@ -59,6 +57,7 @@ app.use(function(request, response, next){
 */
 
 
+
 app.use(function(request, response, next) {
     response.header("Access-Control-Allow-Origin", "http://localhost:4200");
     response.header("Access-Control-Allow-Credentials", true);
@@ -70,30 +69,6 @@ app.use(function(request, response, next) {
     next();
 });
 
-/*
-
-
-
-/!* CONFIG APP EXPRESS *!/
-app.use(express.static('public'));
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(session({
-    secret: 'keyboard cat'
-}));
-app.use(passport.initialize());
-app.use(passport.session());
-// app.use(app.router);
-// require('./core/passport');
-app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:4200");
-    res.header("Access-Control-Allow-Credentials", true);
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    next();
-});
-
-*/
 
 /* ROUTES */
 const routes = require('./routes/index');
