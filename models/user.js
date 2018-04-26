@@ -9,6 +9,7 @@ const userSchema = new Schema(
         password: {type: String},
         role: {type: String, default: 'employee', enum: ['lead', 'admin', 'employee']},
         leads: {type: Array, default: []},
+        employees: {type: Array, default: []},
         avatar: {type: String, default: `http://localhost:3020/images/avatar.jpg`},
         gid: {type: String, default: null},
         fid: {type: String, default: null}
@@ -19,8 +20,9 @@ const userSchema = new Schema(
 const commentSchema = new Schema({
     lead: {type: String, required: true},
     employee : {type: String, required: true},
-    comment: {type: String, required: true}
-}, {versionKey: false})
+    message: {type: String, required: true},
+    date: {type: String, required:true}
+}, {versionKey: false});
 
 const UserDoc = mongoose.model(global.userModel, userSchema);
 const CommentDoc = mongoose.model('Comment', commentSchema);

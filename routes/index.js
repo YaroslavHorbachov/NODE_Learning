@@ -14,9 +14,15 @@ let loginAuthFacebook = require('./loginAuthFacebook');
 let testNgRok = require('./test.ngRok');
 let testNgRokLogout = require('./test.ngRokLogout');
 let getUserData = require('./api.userState');
+let getEmployees = require('./api.getEmployees');
 let authGoogleRedirect = require('./loginAuthGoogle');
+let getMessageList = require('./api.getMessagesList');
+let sendMessage = require('./api.sendMessage');
 module.exports = {
     log,
+    sendMessage,
+    getMessageList,
+    getEmployees,
     getUserData,
     logout,
     testNgRok,
