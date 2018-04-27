@@ -1,20 +1,11 @@
-const User = require('./../models/user').UserDoc;
+const getEmployeesController = require('../controllers/getEmployees.controller').getEmployeesController
 
-function getEmployees (){
-    app.get('/api/getEmployees', (req,res)=>{
-        function getEmployeesController(req, res){
-           const cUser = req.user;
-            User.findById(cUser.id)
-                .then((data) => {
-                    User.find({})
-                        .then((listUsers) =>{
-                            const employeesList = listUsers.filter(user => user.leads.includes(data.email));
-                            res.send(JSON.stringify(employeesList));
-                        })
-                })
-                .catch((err) => console.log('Throw from getEmployees', err))
+function getEmployees() {
+    app.get('/api/getEmployees', (req, res) => {
+            getEmployeesController(req, res);
         }
-        getEmployeesController(req,res);
-    })
+    )
 }
+
+
 module.exports = getEmployees;
