@@ -3,7 +3,8 @@ const passport = require('passport'),
     User = require('./../models/user').UserDoc,
     ngRokHttps = 'https://80a253de.ngrok.io/login/auth/facebook',
     FacebookStrategy = require('passport-facebook').Strategy,
-    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+    GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
+    bcrypt = require('bcryptjs');
 
 const FACEBOOK = {
     ID: "436030020177660",
@@ -28,7 +29,20 @@ passport.use(new LocalStrategy(
             }
             else {
                 if (doc) {
-                    done(null, {fname: doc.fname, id: doc._id, status: 'done'})
+                    bcrypt.compare(password, doc.password)
+                        .then(res => console.log('Res ', res))
+                        .catch(err => console.log('Err ', err));
+                    if (bcrypt.compareSync(password, doc.password)) {
+                        console.log(doc)
+                        done(null, {
+                            fname: doc.fname,
+                            id: doc._id,
+                            status: 'done',
+                            role: doc.role
+                        })
+                    } else {
+                        done(null, false)
+                    }
                 } else {
                     done(null, false)
                 }
@@ -45,7 +59,7 @@ passport.use(new FacebookStrategy({
         profileFields: ['id', 'email', 'name']
     },
     function (accessToken, refreshToken, profile, done) {
-    console.log(profile);
+        console.log(profile);
         const data = profile._json;
         const user = new User({
             fname: data.first_name,

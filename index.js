@@ -1,40 +1,30 @@
-
-/*
-var path = require('path'),
-    express = require('express'),
-    bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser'),
-    ejs = require('ejs'),
-    mongoose = require('mongoose'),
-    session = require('express-session'),
-    MongoStore = require('connect-mongo')(session),
-    passport = require('passport');
-*/
-
-// mongoose.connect('mongodb://localhost/' + global.userDB);
-// const db = mongoose.connection;
-/*SAVE GLOBAL VARIABLES */
+/* SAVE GLOBAL VARIABLES */
 Object.assign(global, require('./core/globals'));
 
-var express = require("express");
-var ejs = require("ejs")
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var bodyParser = require("body-parser");
-var session = require("express-session");
+/* DEPENDENCIES */
+const express = require("express");
+const ejs = require("ejs");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const bodyParser = require("body-parser");
+const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
-const CommentUser = require('./models/user').CommentDoc;
 require("./core/globals");
-var db = require("./core/db");
-var passport = require("./core/passport");
+const db = require("./core/db");
+const passport = require("./core/passport");
 
 
 
-app.set('view engine','ejs')
-app.use(express.static(path.join(__dirname, "public")));
-app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(
+global.app.set('view engine','ejs');
+
+/* PARSERS */
+global.app.use(express.static(path.join(__dirname, "public")));
+global.app.use(cookieParser());
+global.app.use(bodyParser.json());
+
+
+/* PASSPORT AUTH */
+global.app.use(
     session({
         resave: false,
         saveUninitialized: true,
@@ -44,21 +34,12 @@ app.use(
         })
     })
 );
-app.use(passport.initialize());
-app.use(passport.session());
+global.app.use(passport.initialize());
+global.app.use(passport.session());
 
-/*
-app.use(function(request, response, next){
-    LOGGER.info({
-        message: `TIME:${new Date().toLocaleDateString('eu',{ hour: 'numeric', minute: 'numeric', second: 'numeric'})} METHOD:${request.method} PROTOCOL:${request.protocol} URL:${request.url} USER_AGENT:${request.get('User-Agent')}`
-    });
-    next();
-});
-*/
+/* CORS */
 
-
-
-app.use(function(request, response, next) {
+global.app.use(function(request, response, next) {
     response.header("Access-Control-Allow-Origin", "http://localhost:4200");
     response.header("Access-Control-Allow-Credentials", true);
     response.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
@@ -69,12 +50,8 @@ app.use(function(request, response, next) {
     next();
 });
 
-
 /* ROUTES */
-const routes = require('./routes/index');
-for (let route in routes) {
-    routes[route]();
-}
-
-app.listen(3020);
+require('./routes/index')();
+/* RUN SERVER */
+global.app.listen(3020);
 console.log('Listen', 3020);

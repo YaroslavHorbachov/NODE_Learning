@@ -1,23 +1,24 @@
+/*
 let home = require('./server.routes/home');
-let login = require('./login');
-let register = require('./register');
-let log = require('./api.log');
-let change = require('./api.updateAvatar');
-let getUserList = require('./api.getUserList');
-let logout = require('./logout');
-let loginGoogle = require('./loginGoogle');
-let getUser = require('./api.user');
-let deleteUser = require('./api.deleteUser');
+let login = require('./server/login');
+let register = require('./server/register');
+let log = require('./api/api.log');
+let change = require('./api/api.updateAvatar');
+let getUserList = require('./api/api.getUserList');
+let logout = require('./server/logout');
+let loginGoogle = require('./server/loginGoogle');
+let getUser = require('./api/api.user');
+let deleteUser = require('./api/api.deleteUser');
 let other = require('./server.routes/404');
-let loginFacebook = require('./loginFacebook');
-let loginAuthFacebook = require('./loginAuthFacebook');
-let testNgRok = require('./test.ngRok');
-let testNgRokLogout = require('./test.ngRokLogout');
-let getUserData = require('./api.userState');
-let getEmployees = require('./api.getEmployees');
-let authGoogleRedirect = require('./loginAuthGoogle');
-let getMessageList = require('./api.getMessagesList');
-let sendMessage = require('./api.sendMessage');
+let loginFacebook = require('./server/loginFacebook');
+let loginAuthFacebook = require('./server/loginAuthFacebook');
+let testNgRok = require('./server/test.ngRok');
+let testNgRokLogout = require('./server/test.ngRokLogout');
+let getUserData = require('./api/api.userState');
+let getEmployees = require('./api/api.getEmployees');
+let authGoogleRedirect = require('./server/loginAuthGoogle');
+let getMessageList = require('./api/api.getMessagesList');
+let sendMessage = require('./api/api.sendMessage');
 module.exports = {
     log,
     sendMessage,
@@ -39,4 +40,12 @@ module.exports = {
     register,
     getUserList,
     other
-};
+};*/
+
+function deploy(){
+    const api = require('./api');
+    const server = require('./server');
+    app.use('', api);
+    app.use('',server);
+}
+module.exports = deploy;

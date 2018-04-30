@@ -3,16 +3,21 @@ const getIdByCookie = require('../controllers/getEmployees.controller').getIdFro
 const getMessageListService = require('../services/getMessage.service').getMessageListService;
 
 
-function getLeadById(req, res) {
-    const idLead = getIdByCookie(req);
-    getLeadUser(idLead, res);
-}
-function getMessagesListController(req, res) {
-    if (req.user) {
-        getMessageListService(req.user, res)
-    } else {
-        getLeadById(req, res);
+class LeadController {
+    static getById(req, res) {
+        const idLead = getIdByCookie(req);
+        getLeadUser(idLead, res);
     }
 }
 
-module.exports.getMessagesListController = getMessagesListController;
+class MessageListController {
+    static getList(req, res) {
+        if (req.user) {
+            getMessageListService(req.user, res)
+        } else {
+            LeadController.getById(req, res);
+        }
+    }
+}
+
+module.exports.getMessagesListController = MessageListController.getList;
