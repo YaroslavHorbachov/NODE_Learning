@@ -4,17 +4,7 @@ const UserDoc = require('../models/user').UserDoc,
 
 class MongoController {
     static mongoConnect(req,res) {
-        const body = req.body,
-            fname = body.fname,
-            lname = body.lname,
-            email = body.email,
-            password = body.password;
-        const user = new UserDoc({
-            fname: fname,
-            lname: lname,
-            email: email,
-            password: password
-        });
+        const user = MongoController.createConnection(req);
         function createUser(user) {
             bcrypt.genSalt(10, function (err, salt) {
                 bcrypt.hash(user.password, salt, function (err, hash) {
@@ -25,12 +15,20 @@ class MongoController {
                 });
             });
         }
-
         createUser(user);
-
-
-
-
+    }
+    static createConnection(req){
+        const body = req.body,
+            fname = body.fname,
+            lname = body.lname,
+            email = body.email,
+            password = body.password;
+        return new UserDoc({
+            fname: fname,
+            lname: lname,
+            email: email,
+            password: password
+        });
     }
 }
 module.exports = MongoController.mongoConnect;
