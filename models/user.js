@@ -12,7 +12,8 @@ const userSchema = new Schema(
         employees: {type: Array, default: []},
         avatar: {type: String, default: `http://localhost:3020/images/avatar.jpg`},
         gid: {type: String, default: null},
-        fid: {type: String, default: null}
+        fid: {type: String, default: null},
+        isEmailAuth :{type: String, default: 'false'}
     },
     {versionKey: false}
 );

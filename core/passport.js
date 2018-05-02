@@ -28,29 +28,34 @@ passport.use(new LocalStrategy(
                 done(err);
             }
             else {
-                if (doc) {
-                    bcrypt.compare(password, doc.password)
-                        .then(res => console.log('Res ', res))
-                        .catch(err => console.log('Err ', err));
-                    if (bcrypt.compareSync(password, doc.password)) {
-                        console.log(doc)
-                        done(null, {
-                            fname: doc.fname,
-                            id: doc._id,
-                            status: 'done',
-                            role: doc.role
-                        })
-                    } else {
+
+                    if (doc) {
+                        if (doc.isEmailAuth === 'true') {
+                        bcrypt.compare(password, doc.password)
+                            .then(res => console.log('Res ', res))
+                            .catch(err => console.log('Err ', err));
+                        if (bcrypt.compareSync(password, doc.password)) {
+                            console.log(doc)
+                            done(null, {
+                                fname: doc.fname,
+                                id: doc._id,
+                                status: 'done',
+                                role: doc.role
+                            })
+                        }
+                        else {
+                            done(null, false)
+                        }
+                    }
+                    else {
                         done(null, false)
                     }
-                } else {
-                    done(null, false)
                 }
+                else {done(null, false)}
             }
-
         })
-    }
-));
+    }))
+
 /* FACEBOOK */
 passport.use(new FacebookStrategy({
         clientID: FACEBOOK.ID,

@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const LoggerController = require('../../controllers/logger.controller');
 const getUserController = require('../../controllers/getUserList.controller');
+const emailAuthController = require('../../controllers/emailAuth.controller');
 const deleteUserController = require('../../controllers/deleteUser.controller');
 const updateAvatarController = require('../../controllers/updateAvatar.controller');
 const updateUserDataController = require('../../controllers/updateUserData.controller');
@@ -9,7 +10,7 @@ const updateUserDataAdminController = require('../../controllers/updateUserDataA
 const sendMessageController = require('../../controllers/sendMessage.controller').sendMessageController;
 const getEmployeesController = require('../../controllers/getEmployees.controller').getEmployeesController;
 const getMessagesListController = require('../../controllers/getMessage.controller').getMessagesListController;
-
+const getPrivateUserController = require('../../controllers/getPrivateUser.controller').getPrivateUserController;
 
 router.get('/api/getEmployees', (req, res) => {
         getEmployeesController(req, res);
@@ -31,6 +32,14 @@ router.get('/api/user', (req, res) => {
 router.get('/user/state', (req, res) => {
     console.log('Send User data');
     res.send(JSON.stringify(req.user))
+
+});
+router.post('/user/state/email', (req,res) =>{
+    console.log('#1', req.body)
+    getPrivateUserController(req,res)
+})
+router.get('/api/auth/email', (req, res) => {
+    emailAuthController(req, res)
 });
 router.post('/api/deleteUser', (req, res) => {
     deleteUserController(req, res)
