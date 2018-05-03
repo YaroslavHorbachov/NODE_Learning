@@ -10,9 +10,9 @@ const userSchema = new Schema(
         role: {type: String, default: 'employee', enum: ['lead', 'admin', 'employee']},
         leads: {type: Array, default: []},
         employees: {type: Array, default: []},
+        lastModified:{type: Date, default: new Date().getTime()},
+        lastVisit:{type: Date, default: new Date().getTime()},
         avatar: {type: String, default: `http://localhost:3020/images/avatar.jpg`},
-        gid: {type: String, default: null},
-        fid: {type: String, default: null},
         isEmailAuth :{type: String, default: 'false'}
     },
     {versionKey: false}

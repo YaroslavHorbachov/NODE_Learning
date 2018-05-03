@@ -28,13 +28,9 @@ function mongoConnectService(res, model, user) {
 function preSend(param) {
     const link = `http://localhost:3020/api/auth/email/?id=${param}`;
     const mObj = createMessage({
-        html: `<a 
-style="
+        html: `<a style="
 color: rebeccapurple; 
-background-color: burlywood" 
-href = ${link} >
- REDIRECT TO AUTH LINK 
- </a>`
+background-color: burlywood" href = ${link} >REDIRECT TO AUTH LINK </a>`
     });
 
     function sender() {

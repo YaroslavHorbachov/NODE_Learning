@@ -11,6 +11,7 @@ class updateUserDataAdminController {
                 doc.lname = value.surname;
                 doc.role = value.role;
                 doc.leads = value.leads;
+                doc.lastModified = new Date().getTime();
                 doc.save().then(() => {
                     console.log('User was updated',doc);
                     res.send(doc);

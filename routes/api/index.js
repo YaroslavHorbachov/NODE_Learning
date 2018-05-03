@@ -5,7 +5,9 @@ const getUserController = require('../../controllers/getUserList.controller');
 const emailAuthController = require('../../controllers/emailAuth.controller');
 const deleteUserController = require('../../controllers/deleteUser.controller');
 const updateAvatarController = require('../../controllers/updateAvatar.controller');
+const resetPasswordController = require('../../controllers/resetPassword.controller')
 const updateUserDataController = require('../../controllers/updateUserData.controller');
+const updatePasswordController = require('../../controllers/updatePassword.controller');
 const updateUserDataAdminController = require('../../controllers/updateUserDataAdmin.controller');
 const sendMessageController = require('../../controllers/sendMessage.controller').sendMessageController;
 const getEmployeesController = require('../../controllers/getEmployees.controller').getEmployeesController;
@@ -32,11 +34,9 @@ router.get('/api/user', (req, res) => {
 router.get('/user/state', (req, res) => {
     console.log('Send User data');
     res.send(JSON.stringify(req.user))
-
 });
-router.post('/user/state/email', (req,res) =>{
-    console.log('#1', req.body)
-    getPrivateUserController(req,res)
+router.post('/user/state/email', (req, res) => {
+    getPrivateUserController(req, res)
 })
 router.get('/api/auth/email', (req, res) => {
     emailAuthController(req, res)
@@ -44,6 +44,12 @@ router.get('/api/auth/email', (req, res) => {
 router.post('/api/deleteUser', (req, res) => {
     deleteUserController(req, res)
 });
+router.post('/api/user/password', (req, res) => {
+    updatePasswordController(req, res)
+})
+router.post('/api/user/reset-password', (req, res) => {
+    resetPasswordController(req, res)
+})
 router.post('/api/user', (req, res) => {
     const value = req.body,
         id = req.user._id;

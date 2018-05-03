@@ -28,6 +28,7 @@ class updateAvatarController {
                         if (err) {
                             console.log('Error when searching file ', err)
                         }
+                        doc.lastModified = new Date().getTime();
                         doc.avatar = 'http://localhost:3020/images/avatar_' + req.user.id + ".jpg";
                         doc.save((err) => {
                             if (err) {

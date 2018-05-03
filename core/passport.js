@@ -28,7 +28,6 @@ passport.use(new LocalStrategy(
                 done(err);
             }
             else {
-
                     if (doc) {
                         if (doc.isEmailAuth === 'true') {
                         bcrypt.compare(password, doc.password)
