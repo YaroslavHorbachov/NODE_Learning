@@ -13,6 +13,8 @@ const sendMessageController = require('../../controllers/sendMessage.controller'
 const getEmployeesController = require('../../controllers/getEmployees.controller').getEmployeesController;
 const getMessagesListController = require('../../controllers/getMessage.controller').getMessagesListController;
 const getPrivateUserController = require('../../controllers/getPrivateUser.controller').getPrivateUserController;
+const setEmailSettingsController = require('../../controllers/setEmailSettings.controller').setEmailSettingsController
+const getEmailSettingsController = require('../../controllers/getEmailSettings.controller').getEmailSettingsController;
 
 router.get('/api/getEmployees', (req, res) => {
         getEmployeesController(req, res);
@@ -50,6 +52,15 @@ router.post('/api/user/password', (req, res) => {
 router.post('/api/user/reset-password', (req, res) => {
     resetPasswordController(req, res)
 })
+router.get('/api/email/settings', (req, res) => {
+    getEmailSettingsController(req, res)
+})
+
+router.post('/api/email/settings', (req, res) => {
+    setEmailSettingsController(req, res)
+})
+
+
 router.post('/api/user', (req, res) => {
     const value = req.body,
         id = req.user._id;

@@ -10,22 +10,33 @@ const userSchema = new Schema(
         role: {type: String, default: 'employee', enum: ['lead', 'admin', 'employee']},
         leads: {type: Array, default: []},
         employees: {type: Array, default: []},
-        lastModified:{type: Date, default: new Date().getTime()},
-        lastVisit:{type: Date, default: new Date().getTime()},
+        lastModified: {type: Date, default: new Date().getTime()},
+        lastVisit: {type: Date},
         avatar: {type: String, default: `http://localhost:3020/images/avatar.jpg`},
-        isEmailAuth :{type: String, default: 'false'}
+        isEmailAuth: {type: String, default: 'false'}
     },
     {versionKey: false}
 );
 
 const commentSchema = new Schema({
     lead: {type: String, required: true},
-    employee : {type: String, required: true},
+    employee: {type: String, required: true},
     message: {type: String, required: true},
-    date: {type: String, required:true}
+    date: {type: String, required: true}
 }, {versionKey: false});
 
+
+const settingsSchema = new Schema({
+    header: {type: String, required: true},
+    footer: {type: String, required: true},
+    date: {type: Date}
+}, {versionKey: false});
+
+const SettingsDoc = mongoose.model('Settings', settingsSchema)
 const UserDoc = mongoose.model(global.userModel, userSchema);
 const CommentDoc = mongoose.model('Comment', commentSchema);
-module.exports.CommentDoc = CommentDoc;
-module.exports.UserDoc = UserDoc;
+module.exports = {
+    SettingsDoc,
+    UserDoc,
+    CommentDoc
+}

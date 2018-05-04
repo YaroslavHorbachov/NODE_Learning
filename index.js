@@ -35,6 +35,11 @@ global.app.use(express.static(path.join(__dirname, "public")));
 global.app.use(cookieParser());
 global.app.use(bodyParser.json());
 
+/* SHEDULER */
+
+/* NOTIFICATION */
+// require('./core/scheduler')
+require('./controllers/review-notification.controller').printAsync()
 
 /* PASSPORT AUTH */
 global.app.use(
@@ -50,7 +55,6 @@ global.app.use(
 global.app.use(passport.initialize());
 global.app.use(passport.session());
 
-/* CORS */
 
 
 /* ROUTES */

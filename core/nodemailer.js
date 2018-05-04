@@ -23,7 +23,7 @@ const transporter = nodeMailer.createTransport({
 };*/
 
 function createMessage({
-    from = '"Freddy Foo 👻" <MyApp@Task6.com>',
+    from = '"Gorbachov Yaroslav 👻" <SecondFloor@ITCraft.com>',
     to = 'jonny_0154@outlook.com',
     subject = 'Hello ✔ Dmitriy',
     html = '<h1>Test EMAIL </h1>'}) {

@@ -14,11 +14,13 @@ class updateUserDataController {
                 } else {
                     doc.lastVisit = new Date().getTime();
                 }
-                console.log('Prev docum', doc)
-                doc.save().then(() => {
-                    console.log('User was updated');
-                    res.send(doc)
-                })
+                console.log('Prev docum', doc);
+                doc
+                    .save()
+                    .then(() => {
+                        console.log('User was updated');
+                        res.send(doc)
+                    })
             }
         })
     }
