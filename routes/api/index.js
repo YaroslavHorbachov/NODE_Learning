@@ -5,9 +5,10 @@ const getUserController = require('../../controllers/getUserList.controller');
 const emailAuthController = require('../../controllers/emailAuth.controller');
 const deleteUserController = require('../../controllers/deleteUser.controller');
 const updateAvatarController = require('../../controllers/updateAvatar.controller');
-const resetPasswordController = require('../../controllers/resetPassword.controller')
+const resetPasswordController = require('../../controllers/resetPassword.controller');
 const updateUserDataController = require('../../controllers/updateUserData.controller');
 const updatePasswordController = require('../../controllers/updatePassword.controller');
+const getMessageHistoryController = require('../../controllers/getMessageHistory.controller');
 const updateUserDataAdminController = require('../../controllers/updateUserDataAdmin.controller');
 const sendMessageController = require('../../controllers/sendMessage.controller').sendMessageController;
 const getEmployeesController = require('../../controllers/getEmployees.controller').getEmployeesController;
@@ -18,10 +19,12 @@ const getEmailSettingsController = require('../../controllers/getEmailSettings.c
 
 router.get('/api/getEmployees', (req, res) => {
         getEmployeesController(req, res);
-    }
-);
+    });
 router.get('/api/getMessages', (req, res) => {
     getMessagesListController(req, res);
+});
+router.get('/api/message/history', (req, res) => {
+    getMessageHistoryController(req,res)
 });
 router.get('/api/getUserList', (req, res) => {
     getUserController(res)
@@ -59,7 +62,6 @@ router.get('/api/email/settings', (req, res) => {
 router.post('/api/email/settings', (req, res) => {
     setEmailSettingsController(req, res)
 })
-
 
 router.post('/api/user', (req, res) => {
     const value = req.body,

@@ -1,4 +1,4 @@
-const {startJob, cancelJob, checkJob} = require('../core/scheduler');
+const {startJob, cancelJob, checkJob, setDayOfWeek} = require('../core/scheduler');
 const {transporter, createMessage} = require('../core/nodemailer');
 const {UserDoc, CommentDoc, SettingsDoc} = require('../models/user')
 const {isArray, createAndPush} = require('../core/config/utils/utils');
@@ -20,7 +20,7 @@ async function listLeads() {
                             baseLead[lead].push(user.email) :
                             createAndPush(baseLead, lead, user.email))
                 }
-            })
+            });
             return baseLead
         })
         .catch(err => console.log('Error on listLeads ', err))
@@ -37,7 +37,6 @@ function setMessage({footer, header, list, to}) {
 
 async function getSettingsService() {
     return SettingsDoc.findOne().then(data => {
-        console.log(data);
         return data
     }).catch(err => console.log('Some problem with settings ', err))
 }
@@ -46,20 +45,28 @@ async function getSettingsService() {
 function printAsync() {
     Promise.resolve()
         .then(() => console.log('Start ...'))
-        .then(() => updateOrCreateJob())
         .then(async () => await listLeads())
         .then(async (list) => {
             const {date, footer, header} = await getSettingsService();
             return {date, footer, header, list}
         })
-        .then(({date, footer, header, list}) =>
+        .then(({date, footer, header, list}) => {
+            console.log('Working ...');
+            const rule = setDayOfWeek(date);
+            if (checkJob()) {
+                startJob(
+                    rule,
+                    () => notifyRelatedLeads({footer, header, list}));
+                console.log('Update scheduler');
+                return true
+            }
             startJob(
-                '*/2 * * * * *',
+                rule,
                 () => notifyRelatedLeads({footer, header, list})
-            ))
-
-
-
+            );
+            console.log('Create scheduler');
+            return true
+        })
 }
 
 function updateOrCreateJob() {
@@ -69,17 +76,14 @@ function updateOrCreateJob() {
 
 function notifyRelatedLeads({footer, header, list}) {
 
-   /* CONFIGURE SCHEDULER */
-    console.log(checkJob())
-    setTimeout(() => cancelJob(),5000)
-
+    /* CONFIGURE SCHEDULER */
 
 
     Object.entries(list)
         .forEach(lead => {
             transporter
                 .sendMail(setMessage({header, footer, list: lead[1].join('\n'), to: lead[0]}))
-                .then(info => console.log(info))
+                .then(info => console.log('Message ',info.messageId))
                 .catch(err => console.log('When send mail error', err))
         })
 }
@@ -95,7 +99,7 @@ function createTextWithEmployees(header, footer, list) {
 module.exports = {
     listLeads,
     printAsync
-}
+};
 
 /*.then(doc =>{
             const baseLead = {};

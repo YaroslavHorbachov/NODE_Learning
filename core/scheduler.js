@@ -1,25 +1,40 @@
 const schedule = require('node-schedule');
-let ActiveRule = null;
+let ActiveRule;
 
-async function startJob(rule, cb) {
-    const job =  await schedule.scheduleJob(rule, cb) ;
-    ActiveRule = job;
+class Scheduler {
+    constructor() {
+        this.startJob = this.startJob.bind(this);
+        this.cancelJob = this.cancelJob.bind(this);
+        this.checkJob = this.checkJob.bind(this);
+        this.setDayOfWeek = this.setDayOfWeek.bind(this);
+    }
+
+    async startJob(rule, cb) {
+        ActiveRule = await schedule.scheduleJob(rule, cb);
+    };
+
+    cancelJob ()  {
+        ActiveRule.cancel();
+        console.log('Active Rule canceled and is null ')
+    };
+
+    checkJob() {
+        console.log(ActiveRule);
+        return Boolean(ActiveRule);
+    };
+
+    setDayOfWeek(date) {
+        const rule = new schedule.RecurrenceRule();
+        rule.dayOfWeek = date.getDay();
+        return rule
+    }
 }
 
-function cancelJob() {
-    ActiveRule.cancel();
-    console.log('Active Rule canceled and is null ')
-}
-
-function checkJob(){
-    console.log(ActiveRule)
-    return Boolean(ActiveRule);
-}
-
-
-module.exports = {
+/*module.exports = {
     startJob,
     cancelJob,
-    checkJob
-}
+    checkJob,
+    setDayOfWeek
+}*/
+module.exports = new Scheduler;
 

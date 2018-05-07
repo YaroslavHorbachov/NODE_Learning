@@ -7,7 +7,7 @@ const userSchema = new Schema(
         lname: {type: String, required: true},
         email: {type: String},
         password: {type: String},
-        role: {type: String, default: 'employee', enum: ['lead', 'admin', 'employee']},
+        role: {type: String, default: 'employee', enum: ['lead', 'admin', 'manager','employee']},
         leads: {type: Array, default: []},
         employees: {type: Array, default: []},
         lastModified: {type: Date, default: new Date().getTime()},
