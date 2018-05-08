@@ -33,6 +33,7 @@ router.get('/log', (req, res) => {
     console.log(req.session);
     LoggerController(res)
 });
+
 router.get('/api/user', (req, res) => {
     res.send(JSON.stringify(req.user))
 });

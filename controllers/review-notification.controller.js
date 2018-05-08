@@ -1,11 +1,9 @@
 const {startJob, cancelJob, checkJob, setDayOfWeek} = require('../core/scheduler');
 const {transporter, createMessage} = require('../core/nodemailer');
-const {UserDoc, CommentDoc, SettingsDoc} = require('../models/user')
+const {UserDoc, SettingsDoc} = require('../models/user');
 const {isArray, createAndPush} = require('../core/config/utils/utils');
 
-function reviewNotificationController(date, cb) {
-    startJob(date, cb)
-}
+
 
 async function listLeads() {
     return UserDoc
@@ -41,51 +39,90 @@ async function getSettingsService() {
     }).catch(err => console.log('Some problem with settings ', err))
 }
 
+async function getSettings() {
+    const {date, footer, header} = await getSettingsService();
+    return {date, footer, header}
+}
 
 function printAsync() {
     Promise.resolve()
         .then(() => console.log('Start ...'))
         .then(async () => await listLeads())
         .then(async (list) => {
-            const {date, footer, header} = await getSettingsService();
-            return {date, footer, header, list}
+            const data = await getSettings();
+            return {...data, list}
         })
-        .then(({date, footer, header, list}) => {
+        .then(async ({date, footer, header, list}) => {
             console.log('Working ...');
             const rule = setDayOfWeek(date);
             if (checkJob()) {
+                cancelJob();
                 startJob(
                     rule,
-                    () => notifyRelatedLeads({footer, header, list}));
+                    () => {
+                        notifyRelatedLeads({footer, header, list});
+                        notifyRelatedManagers({footer, header,});
+                    });
                 console.log('Update scheduler');
                 return true
             }
             startJob(
                 rule,
-                () => notifyRelatedLeads({footer, header, list})
+                async () => {
+                    await notifyRelatedLeads({footer, header, list});
+                    notifyRelatedManagers({footer, header,});
+                }
             );
             console.log('Create scheduler');
             return true
         })
 }
 
-function updateOrCreateJob() {
-    console.log(checkJob())
-}
-
-
 function notifyRelatedLeads({footer, header, list}) {
-
     /* CONFIGURE SCHEDULER */
-
-
     Object.entries(list)
         .forEach(lead => {
             transporter
                 .sendMail(setMessage({header, footer, list: lead[1].join('\n'), to: lead[0]}))
-                .then(info => console.log('Message ',info.messageId))
+                .then(info => console.log('Message to Lead', info.messageId))
                 .catch(err => console.log('When send mail error', err))
         })
+}
+
+function leadsOfManager() {
+    return UserDoc.find()
+        .then(async data => {
+            const baseData = {};
+            const managers = data.filter(user => user.role === 'lead').map(user => {
+                baseData[user.manager] = isArray(baseData[user.manager]) ?
+                    [...baseData[user.manager], user.email] :
+                    [user.email];
+                return user.manager
+
+            });
+            const managersProfile = await Promise.all(managers.map(id => UserDoc.findById(id)));
+            return {baseData, managersProfile}
+        })
+        .then(({baseData, managersProfile}) => {
+            const managers = Object.entries(baseData);
+            managers.forEach((field, idx, arr) => {
+                managersProfile.forEach((manager) => {
+                    String(manager._id) === field[0] ? arr[idx][0] = manager.email : null
+                })
+            });
+            return managers
+        })
+}
+
+function notifyRelatedManagers({footer, header}) {
+    leadsOfManager().then(managers => {
+        managers.forEach(([manager, employees]) => {
+            transporter
+                .sendMail(setMessage({footer, header, list: employees, to: manager}))
+                .then(info => console.log('Message to Manager ', info.messageId))
+                .catch(err => console.log('When send mail error', err))
+        })
+    })
 }
 
 function createTextWithEmployees(header, footer, list) {
@@ -96,8 +133,8 @@ function createTextWithEmployees(header, footer, list) {
 `
 }
 
+
 module.exports = {
-    listLeads,
     printAsync
 };
 

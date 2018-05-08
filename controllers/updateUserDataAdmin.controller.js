@@ -9,6 +9,7 @@ class updateUserDataAdminController {
                 console.log(err);
             }
             else {
+                doc.manager = value.manager || [] ;
                 doc.fname = value.name;
                 doc.lname = value.surname;
                 doc.role = value.role;
@@ -23,6 +24,7 @@ class updateUserDataAdminController {
         })
     }
 }
+
 /*
 
 function addEmployee(leadArr, employee) {

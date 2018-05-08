@@ -9,6 +9,7 @@ const userSchema = new Schema(
         password: {type: String},
         role: {type: String, default: 'employee', enum: ['lead', 'admin', 'manager','employee']},
         leads: {type: Array, default: []},
+        manager: {type: Array, default: []},
         employees: {type: Array, default: []},
         lastModified: {type: Date, default: new Date().getTime()},
         lastVisit: {type: Date},

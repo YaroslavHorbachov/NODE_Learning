@@ -38,8 +38,10 @@ global.app.use(bodyParser.json());
 /* SHEDULER */
 
 /* NOTIFICATION */
-// require('./core/scheduler')
-require('./controllers/review-notification.controller').printAsync()
+
+require('./controllers/review-notification.controller').printAsync();
+// require('./controllers/review-notification.controller').listOfLeads()
+// require('./controllers/review-notification.controller').notifyRelatedManagers();
 
 /* PASSPORT AUTH */
 global.app.use(
