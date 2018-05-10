@@ -20,7 +20,8 @@ const userSchema = new Schema(
 );
 
 const commentSchema = new Schema({
-    lead: {type: String, required: true},
+    manager: {type: String},
+    lead: {type: String},
     employee: {type: String, required: true},
     message: {type: String, required: true},
     date: {type: String, required: true}

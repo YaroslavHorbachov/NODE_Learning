@@ -103,6 +103,10 @@ function leadsOfManager() {
             const managersProfile = await Promise.all(managers.map(id => UserDoc.findById(id)));
             return {baseData, managersProfile}
         })
+}
+
+function notifyRelatedManagers({footer, header}) {
+    leadsOfManager()
         .then(({baseData, managersProfile}) => {
             const managers = Object.entries(baseData);
             managers.forEach((field, idx, arr) => {
@@ -112,10 +116,7 @@ function leadsOfManager() {
             });
             return managers
         })
-}
-
-function notifyRelatedManagers({footer, header}) {
-    leadsOfManager().then(managers => {
+        .then(managers => {
         managers.forEach(([manager, employees]) => {
             transporter
                 .sendMail(setMessage({footer, header, list: employees, to: manager}))
@@ -135,7 +136,8 @@ function createTextWithEmployees(header, footer, list) {
 
 
 module.exports = {
-    printAsync
+    printAsync,
+    leadsOfManager
 };
 
 /*.then(doc =>{

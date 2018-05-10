@@ -3,7 +3,7 @@ const UserDoc = require('../models/user').UserDoc;
 
 function getMessageListService(value, res) {
     CommentDoc
-        .find({lead: value.email})
+        .find({[value.role]: value.email})
         .then(data => {
             console.log('Message successfully find ', data);
             res.send(JSON.stringify(data));

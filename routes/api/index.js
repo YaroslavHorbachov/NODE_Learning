@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const LoggerController = require('../../controllers/logger.controller');
+const getLeadsController = require('../../controllers/getLeads.controller');
 const getUserController = require('../../controllers/getUserList.controller');
 const emailAuthController = require('../../controllers/emailAuth.controller');
 const deleteUserController = require('../../controllers/deleteUser.controller');
@@ -14,9 +15,10 @@ const sendMessageController = require('../../controllers/sendMessage.controller'
 const getEmployeesController = require('../../controllers/getEmployees.controller').getEmployeesController;
 const getMessagesListController = require('../../controllers/getMessage.controller').getMessagesListController;
 const getPrivateUserController = require('../../controllers/getPrivateUser.controller').getPrivateUserController;
-const setEmailSettingsController = require('../../controllers/setEmailSettings.controller').setEmailSettingsController
+const getManagerListController = require('../../controllers/getManagerList.controller').getManagersList;
+const setEmailSettingsController = require('../../controllers/setEmailSettings.controller').setEmailSettingsController;
 const getEmailSettingsController = require('../../controllers/getEmailSettings.controller').getEmailSettingsController;
-
+const getManagerCommentsController = require('../../controllers/getManagerComments.controller').getManagerCommentsController;
 router.get('/api/getEmployees', (req, res) => {
         getEmployeesController(req, res);
     });
@@ -27,13 +29,18 @@ router.get('/api/message/history', (req, res) => {
     getMessageHistoryController(req,res)
 });
 router.get('/api/getUserList', (req, res) => {
-    getUserController(res)
+    req.user.role === 'manager' ? getLeadsController( req ,res) : getUserController(res)
 });
 router.get('/log', (req, res) => {
     console.log(req.session);
     LoggerController(res)
 });
-
+router.get('/api/manager/list', (req, res) => {
+    getManagerListController(req,res)
+})
+router.post('/api/manager/comment-list', (req, res)=> {
+    getManagerCommentsController(req,res)
+})
 router.get('/api/user', (req, res) => {
     res.send(JSON.stringify(req.user))
 });

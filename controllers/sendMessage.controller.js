@@ -4,9 +4,11 @@ const getIdByCookie = require('../controllers/getEmployees.controller').getIdFro
 
 class sendMessageController {
     static async sendMessage(req, res) {
-        let lead;
+        let lead , manager , role;
         if (req.user) {
-            lead = req.user.email;
+            const user = req.user;
+            role = user.role;
+            role === 'manager' ? manager = user.email : lead = user.email
         } else {
             lead = await sendMessageController.getLead(req);
         }
@@ -14,6 +16,7 @@ class sendMessageController {
         const employee = req.body.employee;
         const date = req.body.date;
         const comment = new Comment({
+            manager,
             lead,
             message,
             employee,
