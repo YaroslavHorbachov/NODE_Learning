@@ -1,15 +1,18 @@
 const leadsOfManager = require('./review-notification.controller').leadsOfManager;
-const UserDoc = require('../models/user').UserDoc
+const dispatch = require('../core/config/utils/dispatch');
+const UserDoc = require('../models/user').UserDoc;
 const co = require('co')
 
 function getManagersList(req, res) {
-    co(actor(req)).then(([data]) => res.send(data))
+    dispatch(req,res,actor)
 }
 function *actor (req){
     const user = req.user.id;
     const {baseData} = yield leadsOfManager();
     const listOfEmployees = baseData[user];
-    return yield listOfEmployees.map(email => UserDoc.find({email: email}))
+    const result = yield listOfEmployees.map(email => UserDoc.find({email: email}));
+    console.log(result)
+    return result;
 }
 
 
