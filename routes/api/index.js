@@ -5,6 +5,7 @@ const getLeadsController = require('../../controllers/getLeads.controller');
 const getUserController = require('../../controllers/getUserList.controller');
 const emailAuthController = require('../../controllers/emailAuth.controller');
 const deleteUserController = require('../../controllers/deleteUser.controller');
+const generatePDFController = require('../../controllers/generatePDF.controller');
 const updateAvatarController = require('../../controllers/updateAvatar.controller');
 const resetPasswordController = require('../../controllers/resetPassword.controller');
 const updateUserDataController = require('../../controllers/updateUserData.controller');
@@ -32,7 +33,6 @@ router.get('/api/getUserList', (req, res) => {
     req.user.role === 'manager' ? getLeadsController( req ,res) : getUserController(res)
 });
 router.get('/log', (req, res) => {
-    console.log(req.session);
     LoggerController(res)
 });
 router.get('/api/manager/list', (req, res) => {
@@ -45,7 +45,6 @@ router.get('/api/user', (req, res) => {
     res.send(JSON.stringify(req.user))
 });
 router.get('/user/state', (req, res) => {
-    console.log('Send User data');
     res.send(JSON.stringify(req.user))
 });
 router.post('/user/state/email', (req, res) => {
@@ -69,6 +68,9 @@ router.get('/api/email/settings', (req, res) => {
 
 router.post('/api/email/settings', (req, res) => {
     setEmailSettingsController(req, res)
+})
+router.get('/api/generatePDF', (req,res) =>{
+    generatePDFController(req,res)
 })
 
 router.post('/api/user', (req, res) => {

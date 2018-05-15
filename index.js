@@ -17,6 +17,8 @@ const db = require("./core/db");
 const passport = require("./core/passport");
 
 
+
+
 global.app.use(function (request, response, next) {
     response.header("Access-Control-Allow-Origin", "http://localhost:4200");
     response.header("Access-Control-Allow-Credentials", true);
@@ -44,10 +46,11 @@ require('./controllers/review-notification.controller').printAsync();
 // require('./controllers/review-notification.controller').notifyRelatedManagers();
 
 /* PASSPORT AUTH */
+
 global.app.use(
     session({
-        resave: false,
-        saveUninitialized: true,
+        resave: true,
+        saveUninitialized: false,
         secret: "secret",
         store: new MongoStore({
             mongooseConnection: db()
