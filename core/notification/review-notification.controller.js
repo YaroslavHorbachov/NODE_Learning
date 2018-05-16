@@ -1,8 +1,11 @@
-const {startJob, cancelJob, checkJob, setDayOfWeek} = require('../core/scheduler');
-const {transporter, createMessage} = require('../core/nodemailer');
-const {UserDoc, SettingsDoc} = require('../models/user');
-const {isArray, createAndPush} = require('../core/config/utils/utils');
-
+const Scheduler = require('../scheduler').Scheduler;
+const {startJob, cancelJob, checkJob, setDayOfWeek} = new Scheduler();
+const {transporter, createMessage} = require('../nodemailer');
+const {UserDoc, SettingsDoc, CommentDoc} = require('../../models/user');
+const {isArray, createAndPush} = require('../config/utils/utils');
+const {dispatch} = require('../config/utils/pure_dispatch');
+const moment = require('moment')
+let ActiveRule ;
 
 
 async function listLeads() {
@@ -117,19 +120,21 @@ function notifyRelatedManagers({footer, header}) {
             return managers
         })
         .then(managers => {
-        managers.forEach(([manager, employees]) => {
-            transporter
-                .sendMail(setMessage({footer, header, list: employees, to: manager}))
-                .then(info => console.log('Message to Manager ', info.messageId))
-                .catch(err => console.log('When send mail error', err))
+            managers.forEach(([manager, employees]) => {
+                transporter
+                    .sendMail(setMessage({footer, header, list: employees, to: manager}))
+                    .then(info => console.log('Message to Manager ', info.messageId))
+                    .catch(err => console.log('When send mail error', err))
+            })
         })
-    })
 }
 
-function createTextWithEmployees(header, footer, list) {
+
+
+function createTextWithEmployees(header, footer, body) {
     return `
         <h3>${header}</h3>
-        <pre>${list}</pre>
+        <pre>${body}</pre>
         <b>${footer}</b>
 `
 }
@@ -139,18 +144,3 @@ module.exports = {
     printAsync,
     leadsOfManager
 };
-
-/*.then(doc =>{
-            const baseLead = {};
-            const employees = doc.filter(user => user.leads.length)
-            employees.forEach(user => {
-                if(user.leads.length) {
-                    user.leads
-                        .forEach(lead => isArray(baseLead[lead]) ?
-                            baseLead[lead].push(user.email) :
-                            createAndPush(baseLead, lead, user.email) )
-                }
-            })
-            console.log(baseLead)
-        })
-        .catch(err => console.log('Error on listLeads ', err))*/

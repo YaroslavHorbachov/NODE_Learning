@@ -1,5 +1,5 @@
 const SettingsDoc = require('../models/user').SettingsDoc;
-const emailAsync = require('../controllers/review-notification.controller').printAsync;
+const emailAsync = require('../core/notification/review-notification.controller').printAsync;
 
 function createSettingsDocService({header, footer, date}) {
     return new SettingsDoc({header, footer, date});

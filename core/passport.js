@@ -111,7 +111,6 @@ passport.use(new GoogleStrategy({
 
 /* SERIALIZE */
 passport.serializeUser(function (user, done) {
-    // console.log('This Serialise user', user.id);
     done(null, user.id)
 });
 

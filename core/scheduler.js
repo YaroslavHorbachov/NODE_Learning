@@ -1,6 +1,6 @@
 const schedule = require('node-schedule');
-let ActiveRule;
 
+let ActiveRule;
 class Scheduler {
     constructor() {
         this.startJob = this.startJob.bind(this);
@@ -24,9 +24,7 @@ class Scheduler {
     };
 
     setDayOfWeek(date) {
-        const rule = new schedule.RecurrenceRule();
-        rule.dayOfWeek = date.getDay();
-        return rule
+        return `0 0 ${date.getDay()} * *`
     }
 }
 
@@ -36,5 +34,7 @@ class Scheduler {
     checkJob,
     setDayOfWeek
 }*/
-module.exports = new Scheduler;
+module.exports = {
+    Scheduler
+};
 

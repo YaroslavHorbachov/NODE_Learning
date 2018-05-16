@@ -69,7 +69,7 @@ router.get('/api/email/settings', (req, res) => {
 router.post('/api/email/settings', (req, res) => {
     setEmailSettingsController(req, res)
 })
-router.get('/api/generatePDF', (req,res) =>{
+router.post('/api/generatePDF', (req,res) =>{
     generatePDFController(req,res)
 })
 

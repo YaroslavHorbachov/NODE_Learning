@@ -40,11 +40,7 @@ global.app.use(bodyParser.json());
 /* SHEDULER */
 
 /* NOTIFICATION */
-
-require('./controllers/review-notification.controller').printAsync();
-// require('./controllers/review-notification.controller').listOfLeads()
-// require('./controllers/review-notification.controller').notifyRelatedManagers();
-
+require('./core/notification/department-send').printAsyncDepartment()
 /* PASSPORT AUTH */
 
 global.app.use(

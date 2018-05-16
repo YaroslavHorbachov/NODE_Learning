@@ -1,7 +1,6 @@
-const leadsOfManager = require('./review-notification.controller').leadsOfManager;
+const leadsOfManager = require('../core/notification/review-notification.controller').leadsOfManager;
 const dispatch = require('../core/config/utils/dispatch');
 const UserDoc = require('../models/user').UserDoc;
-const co = require('co');
 
 function getManagersList(req, res) {
     dispatch(req,res,actor)
