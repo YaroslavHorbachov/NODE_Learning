@@ -5,6 +5,7 @@ const getLeadsController = require('../../controllers/getLeads.controller');
 const getUserController = require('../../controllers/getUserList.controller');
 const emailAuthController = require('../../controllers/emailAuth.controller');
 const deleteUserController = require('../../controllers/deleteUser.controller');
+const {DepartmentController} = require('../../controllers/department.controller');
 const generatePDFController = require('../../controllers/generatePDF.controller');
 const updateAvatarController = require('../../controllers/updateAvatar.controller');
 const resetPasswordController = require('../../controllers/resetPassword.controller');
@@ -20,6 +21,7 @@ const getManagerListController = require('../../controllers/getManagerList.contr
 const setEmailSettingsController = require('../../controllers/setEmailSettings.controller').setEmailSettingsController;
 const getEmailSettingsController = require('../../controllers/getEmailSettings.controller').getEmailSettingsController;
 const getManagerCommentsController = require('../../controllers/getManagerComments.controller').getManagerCommentsController;
+
 router.get('/api/getEmployees', (req, res) => {
         getEmployeesController(req, res);
     });
@@ -35,9 +37,15 @@ router.get('/api/getUserList', (req, res) => {
 router.get('/log', (req, res) => {
     LoggerController(res)
 });
+router.get('/api/department/listEmployee', (req, res) => {
+    new DepartmentController(req,res).allEmployees
+})
+router.get('/api/department/listMessages',(req, res) => {
+    new DepartmentController(req,res).allMessagesOfMonth
+})
 router.get('/api/manager/list', (req, res) => {
     getManagerListController(req,res)
-})
+});
 router.post('/api/manager/comment-list', (req, res)=> {
     getManagerCommentsController(req,res)
 })

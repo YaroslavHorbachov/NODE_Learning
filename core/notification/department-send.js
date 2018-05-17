@@ -17,6 +17,7 @@ function * notifyDepartmentHead() {
                   <a href="http://localhost:4200/reviews">Visit manage page</a> </div>  `;
     return transporter.sendMail(createMessage({to: to || undefined, html}))
 }
+
 const printAsyncDepartment = () => {
     schedule.scheduleJob(`* * ${moment().endOf('month')} * * *`, () =>  dispatch(notifyDepartmentHead())
         .then(info => console.log('Message to Department Head ', info.messageId))
