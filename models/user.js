@@ -36,10 +36,19 @@ const settingsSchema = new Schema({
     date: {type: Date}
 }, {versionKey: false});
 
-const SettingsDoc = mongoose.model('Settings', settingsSchema)
+const reviewSchema = new Schema({
+    author : {type: Schema.Types.ObjectId, ref: global.userModel,  required:true},
+    date: {type: Date, required: true},
+    employee: {type: Schema.Types.ObjectId, required: true, ref: global.userModel}
+})
+
+const ReviewDoc = mongoose.model('Reviews', reviewSchema);
+const SettingsDoc = mongoose.model('Settings', settingsSchema);
 const UserDoc = mongoose.model(global.userModel, userSchema);
 const CommentDoc = mongoose.model('Comment', commentSchema);
+
 module.exports = {
+    ReviewDoc,
     SettingsDoc,
     UserDoc,
     CommentDoc
