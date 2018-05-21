@@ -37,11 +37,20 @@ router.get('/api/getUserList', (req, res) => {
 router.get('/log', (req, res) => {
     LoggerController(res)
 });
-router.get('/api/department/listEmployee', (req, res) => {
+router.post('/api/department/listEmployee', (req, res) => {
     new DepartmentController(req,res).allEmployees
 })
 router.get('/api/department/listMessages',(req, res) => {
     new DepartmentController(req,res).allMessagesOfMonth
+});
+router.get('/api/department/listReview', (req,res) => {
+    new DepartmentController(req,res).reviewAction
+})
+router.post('/api/department/listReviewedEmployees', (req,res) => {
+    new DepartmentController(req,res).commentedEmployee
+})
+router.post('/api/department/setReview', (req,res) => {
+    new DepartmentController(req,res).setReview()
 })
 router.get('/api/manager/list', (req, res) => {
     getManagerListController(req,res)

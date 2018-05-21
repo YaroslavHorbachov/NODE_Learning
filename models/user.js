@@ -38,7 +38,7 @@ const settingsSchema = new Schema({
 
 const reviewSchema = new Schema({
     author : {type: Schema.Types.ObjectId, ref: global.userModel,  required:true},
-    date: {type: Date, required: true},
+    date: {type: Number, required: true},
     employee: {type: Schema.Types.ObjectId, required: true, ref: global.userModel}
 })
 

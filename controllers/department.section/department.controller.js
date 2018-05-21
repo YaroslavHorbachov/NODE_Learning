@@ -1,10 +1,8 @@
 const {CommentDoc, UserDoc, ReviewDoc} = require('../../models/user');
 const dispatch = require('../../core/config/utils/dispatch');
+const pure = require('../../core/config/utils/pure_dispatch').dispatch;
 const {ReviewActionRequest, ErrorHandler} = require('./department-review.model')
-const {LIMIT} = require('./department.constants');
 const moment = require('moment');
-let COUNT;
-let SKIP = 0;
 
 class DepartmentController {
     constructor(req, res) {
@@ -12,25 +10,25 @@ class DepartmentController {
         this.res = res;
     }
 
-    static check() {
-        COUNT > SKIP ? SKIP += 3 : SKIP = 0;
-        console.log(COUNT, SKIP)
-    }
-
     get allEmployees() {
         const actor = function* () {
-            COUNT = yield new Promise(res => UserDoc.find().count().then(res));
-            return yield sub();
-        }
-        const sub = () => new Promise(
-            res => UserDoc.find()
-                .skip(SKIP).limit(LIMIT)
-                .then((data) => {
-                    DepartmentController.check();
-                    res(data)
-                }).catch(console.log));
-        dispatch(null, this.res, actor)
+            const {skip, limit} = {...this.req.body};
+            return yield this.sub(skip, limit);
+
+        }.bind(this);
+
+        dispatch(null, this.res, actor);
     }
+
+    sub(skip, limit) {
+        return new Promise(
+            res => UserDoc.find()
+                .skip(skip)
+                .limit(limit)
+                .then(data =>  res(data))
+                .catch(console.log));
+    }
+
 
     get allMessagesOfMonth() {
         const actor = function* () {
@@ -41,31 +39,53 @@ class DepartmentController {
         dispatch(null, this.res, actor)
     }
 
+    get commentedEmployee() {
+        const actor = function* () {
+            const block = [];
+            const {skip, limit} = {...this.req.body}
+            const allEmployees = yield this.sub();
+            const comments = yield new Promise(res => CommentDoc.find().then(res)); // FOR BIG DATA .skip().limit()
+            allEmployees.forEach( user => comments.forEach(comment => String(comment.employee) === String(user._id)? block.push(user) : null) )
+            return block.slice(skip,limit);
+        }
+        .bind(this)
+        dispatch(null, this.res, actor)
+    }
+
     get reviewAction() {
         try {
             const actor = function* () {
-                yield new Promise(
+                return yield new Promise(
                     res => ReviewDoc
                         .find()
                         .populate('author')
                         .populate('employee')
-                        .then(res))
+                        .then(res)
+                        .catch(res))
             };
-            dispatch(null, this.res, actor(null))
+            dispatch(null, this.res, actor)
         } catch (e) {
             ErrorHandler({res: this.res, text: 'Double population error', error: e})
         }
     }
 
-    reviewAction() {
+    setReview() {
         try {
-            const actor = function* () {
-                const {author, employee} = new ReviewActionRequest(...this.req.body);
-                console.log(author, employee)
-            }
-            dispatch(null, this.res, actor())
+            const actor = function * (){
+                const create = function *() {
+                    const review = new ReviewDoc({
+                        author, employee, date: new Date().getTime()
+                    });
+                    return yield review.save()
+                };
+                const {_id: employee, _doc:{_id: author} } = {...this.req.body, ...this.req.user}
+                const isReported = Object.keys(yield ReviewDoc.find({employee: employee, author: author})).length;
+                return isReported ?  null : yield create()
+            }.bind(this)
+            dispatch(null, this.res, actor)
         }
         catch (e) {
+            console.log(e)
             ErrorHandler({res: this.res, text: 'Request body error ', error: e})
         }
     }
@@ -75,3 +95,19 @@ class DepartmentController {
 module.exports = {
     DepartmentController
 }
+
+
+/*
+*  const withComment = yield function* () {
+                const commentedEmployees = yield function* () {
+                    return allEmployees.filter(empl => new Promise( res => CommentDoc.find({employee: empl._id}).then(data => res(data))))
+                };
+                console.log('WITH ', commentedEmployees.length)
+                return yield pure(commentedEmployees);
+
+                /*
+                Promise.all(commentedEmployees).then(d => {
+                    // console.log('In Promise ', d)
+                    res(d)
+                })*/
+
