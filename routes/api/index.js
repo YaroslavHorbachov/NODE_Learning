@@ -52,6 +52,9 @@ router.post('/api/department/listReviewedEmployees', (req,res) => {
 router.post('/api/department/setReview', (req,res) => {
     new DepartmentController(req,res).setReview()
 })
+router.get('/api/department/takeReview', (req,res) => {
+    new DepartmentController(req,res).takeReview()
+})
 router.get('/api/manager/list', (req, res) => {
     getManagerListController(req,res)
 });

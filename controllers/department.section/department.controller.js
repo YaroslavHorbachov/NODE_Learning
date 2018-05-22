@@ -16,16 +16,15 @@ class DepartmentController {
             return yield this.sub(skip, limit);
 
         }.bind(this);
-
         dispatch(null, this.res, actor);
     }
 
-    sub(skip, limit) {
+    sub(skip = 0, limit = null) {
         return new Promise(
             res => UserDoc.find()
                 .skip(skip)
                 .limit(limit)
-                .then(data =>  res(data))
+                .then(data => res(data))
                 .catch(console.log));
     }
 
@@ -41,14 +40,19 @@ class DepartmentController {
 
     get commentedEmployee() {
         const actor = function* () {
-            const block = [];
             const {skip, limit} = {...this.req.body}
+
             const allEmployees = yield this.sub();
+
             const comments = yield new Promise(res => CommentDoc.find().then(res)); // FOR BIG DATA .skip().limit()
-            allEmployees.forEach( user => comments.forEach(comment => String(comment.employee) === String(user._id)? block.push(user) : null) )
-            return block.slice(skip,limit);
+
+            const find = yield allEmployees.map(employee => CommentDoc.find({employee: employee.id}))
+
+            const clean = find.filter(x=>x.length).map(userA => userA[0].employee)
+
+            return allEmployees.filter(user => clean.includes(String(user._id))).splice(skip, limit) // simulate 
         }
-        .bind(this)
+            .bind(this)
         dispatch(null, this.res, actor)
     }
 
@@ -56,13 +60,10 @@ class DepartmentController {
         try {
             const actor = function* () {
                 return yield new Promise(
-                    res => ReviewDoc
-                        .find()
-                        .populate('author')
-                        .populate('employee')
+                    res => this.takeAllReview()
                         .then(res)
                         .catch(res))
-            };
+            }.bind(this);
             dispatch(null, this.res, actor)
         } catch (e) {
             ErrorHandler({res: this.res, text: 'Double population error', error: e})
@@ -71,20 +72,43 @@ class DepartmentController {
 
     setReview() {
         try {
-            const actor = function * (){
-                const create = function *() {
+            const actor = function* () {
+                const create = function* () {
                     const review = new ReviewDoc({
                         author, employee, date: new Date().getTime()
                     });
                     return yield review.save()
                 };
-                const {_id: employee, _doc:{_id: author} } = {...this.req.body, ...this.req.user}
-                const isReported = Object.keys(yield ReviewDoc.find({employee: employee, author: author})).length;
-                return isReported ?  null : yield create()
+                const {_id: employee, _doc: {_id: author}} = {...this.req.body, ...this.req.user};
+                const Reports = yield new Promise(res => ReviewDoc.find().populate('employee').then(res))
+                const isReported = Reports.map(report => String(report.employee._id) === employee);
+                return isReported.some(el => el) ?  null : yield create()
+
             }.bind(this)
             dispatch(null, this.res, actor)
         }
         catch (e) {
+            console.log(e)
+            ErrorHandler({res: this.res, text: 'Request body error ', error: e})
+        }
+    }
+
+    takeAllReview() {
+        return ReviewDoc.find().populate('author').populate('employee')
+    }
+
+    takeReview() {
+        try {
+            const actor = function* () {
+                const allReview = yield new Promise(res => this.takeAllReview().then(res));
+                const listR = yield UserDoc.find()
+                console.log(listR.length, allReview.length);
+                return listR
+            }.bind(this);
+
+            dispatch(null, this.res, actor)
+
+        } catch (e) {
             console.log(e)
             ErrorHandler({res: this.res, text: 'Request body error ', error: e})
         }
